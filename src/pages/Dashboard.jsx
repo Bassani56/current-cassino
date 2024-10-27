@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import CarouselHist from '../components/carouselHist/CarouselHist';
 import ComponentsHist from '../components/historico/ComponentsHist';
 import CursorTime from '../components/time/CursorTempo';
+
 export default function Dashboards(){
 
     const [showModelRegister, setShowModelRegister] = useState(false);
@@ -34,6 +35,9 @@ export default function Dashboards(){
     // }, [playSound, stop]);
     const[histDados, setHistDados] = useState([])
     const[refresh, setRefresh] = useState(false)
+    const [associacoes, setAssociacoes] = useState([]);
+    const[trava, setTrava] = useState(false)
+    
     const navigate = useNavigate()
     
     return(
@@ -41,13 +45,14 @@ export default function Dashboards(){
             value={{numberHistory, setNumberHistory, 
             showModelRegister, setShowModelRegister,
             histDados, setHistDados, listaDouble, setListaDouble,
-            refresh, setRefresh, girarCarousel, setGirarCarousel}}
+            refresh, setRefresh, girarCarousel, setGirarCarousel,
+            associacoes, setAssociacoes, trava, setTrava}}
         >
             <div className='dashboard' >
                 <Header>
                     <div className='value'>R$-dinheiro</div>
                     <button className='depositar' >Depositar</button>
-                    <button onClick={()=>{navigate("/")}} className='logout'>Logout</button>
+                    <button className='logout' onClick={()=>{navigate("/")}} >Logout</button>
                 </Header>
 
                 <div className="overlay-double" >
@@ -78,7 +83,6 @@ export default function Dashboards(){
 
                 <div className="overlay-double">
                     <div className="historico-container">
-                        <h1>AQUI VAI SER O HISTÓRICO DE JOGO</h1>
                         <ComponentsHist/>
                     </div>
                 </div>

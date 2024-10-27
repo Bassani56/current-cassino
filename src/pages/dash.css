@@ -84,7 +84,7 @@
       }
 
 .down{
-    background-color: #187ed8;
+    background-color:#1f2236;
     height: calc(450px - 353px);
     width: 100%;
     display: flex;
@@ -93,7 +93,7 @@
 }
 
 .down h3{
-    background-color: #1a242d;
+    /* background-color: #1f2236; */
     height: 26px;
     margin-bottom: 0px;
     margin-left: 20px;
@@ -133,29 +133,32 @@
 }
 
 .historico-container {
-    background-color: #1a242d;
+    background-color: #1f2236;
     width: 1060px;
-    height: 738px;
+    height: 758px;
     padding: 10px;
     display: flex;
     flex-direction: column; /* Coloca os itens em coluna */
     gap: 0px; /* Espaçamento entre o h1 e os componentes */
+    box-sizing: border-box;
 }
 
 .historico-container h1 {
     margin-top: 0px;
     color: #6087a8;
     text-align: center; /* Centraliza o h1 */
+    margin-bottom: 0;
 }
 
 .historico-components-wrapper {
     display: flex;
     justify-content: space-between; /* Distribui os componentes horizontalmente */
     gap: 10px; /* Espaço entre os componentes */
+    
 }
 
 .historico-component {
-    background-color: rgb(94, 67, 67);
+    /* background-color: rgb(94, 67, 67); */
     width: 310px;
     height: 680px;
     color: white;
@@ -163,9 +166,24 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+    box-sizing: border-box;
+    gap: 0px;
+    box-shadow: 0 4px 12px rgba(37, 11, 3, 0.137);
 }
 
 .historico-component h2{
-    margin-bottom: 0;
+    /* background-color: #1a242d; */
+    display: flex;
+    /* text-align: center; */
+    justify-content: center;
+    align-items: center;
+    /* margin-bottom: 20px; */
 }
 
+
+.nome-user{
+    /* background-color: rgb(46, 44, 42); */
+    height: 40px;
+    display: flex;
+    text-align: center;
+}

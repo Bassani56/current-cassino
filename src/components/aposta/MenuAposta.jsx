@@ -15,7 +15,7 @@ export default function Aposta(){
     return(
         <div className="menu-aposta" >
             <div className="valor-aposta">
-                <input id="quantia-apostar" defaultValue={'Quantia'} style={{backgroundColor: 'black'}} type="text" />
+                <input id="quantia-apostar" placeholder='Quantia' style={{backgroundColor: 'black'}} type="text" />
                 <button id="divide" >1/2</button>
                 <button id="multiplica">2x</button>
             </div>

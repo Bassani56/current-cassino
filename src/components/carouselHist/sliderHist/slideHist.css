@@ -1,7 +1,7 @@
 .squareHist{
     width: 32px;
     height: 32px;
-    color: rgb(148, 248, 66);
+    color: rgb(242, 248, 248);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .container-hist{
-    background-color: rgb(148, 93, 93);
+    /* background-color: rgb(148, 93, 93); */
     display: flex;
     flex-direction: row-reverse;
     gap: 13px;

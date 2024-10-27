@@ -7,6 +7,7 @@ import Proteger from '../../img/deus-proteja-bolsonabo.jpg'
 import Urgente from '../../img/urgente-bolsonabo.jpg'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../../supabaseClient'
+import './register.css'
 
 export default function Register() {
     const { setShowModelRegister, showModelRegister } = useContext(CurrentContext)
@@ -50,10 +51,8 @@ export default function Register() {
 
     if (showModelRegister) {
         return (
-            <div className="modal-overlay-register">
-                <button onClick={() => { setShowModelRegister(false) }}>Fechar</button>
-
-                <div className="modal-content-register mensagem">
+            <div className="modal-container-register">
+                <div className="mensagem">
                     <h2>AVISO!</h2>
                     <p>Você tem certeza disso?</p>
                     <img src={LogoMensagem} alt="" />
@@ -61,11 +60,15 @@ export default function Register() {
                 </div>
 
                 <div className="modal-content-register cadastro">
+                    <button className='close-button-modal-register' onClick={() => { setShowModelRegister(false) }}>
+                        &times;
+                    </button>
+
                     <h2><strong>Bolazula</strong></h2>
                     <p>Cadastre-se na Bolazula</p>
 
                     <form 
-                        className="modal-content-register cadastro" 
+                        className="cadastro" 
                         onSubmit={handleSignUp}
                     >
                         <input 
@@ -100,18 +103,10 @@ export default function Register() {
                             {selectedPet.length < 1 ? (
                                 <img src={Escolha} alt="" />
                             ) : (
-                                <button type='submit'>Comece já</button>
+                                <button className='' type='submit'>Comece já</button>
                             )}
                         </div>
                     </form>
-                    
-                    {selectedPet === 'bolsonabo' && <img src={Proteger} alt="" />}
-                    {selectedPet === 'lule' && <img src={Urgente} alt="" />}
-                    {selectedPet.length < 1 ? (
-                        <img src={Escolha} alt="" />
-                    ) : (
-                        <button onClick={() => { navigate("/dashboard") }}>Comece já</button>
-                    )}
                 </div>
             </div>
         )

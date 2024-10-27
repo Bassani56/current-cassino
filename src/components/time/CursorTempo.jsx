@@ -14,7 +14,7 @@ export default function CursorTime(){
                 const newWidth = prevWidth - 5;
                 return newWidth > 0 ? newWidth : 0; // Evita valores negativos
             });
-        }, 77);
+        }, 115);
 
         return () => clearInterval(interval); // Limpa o intervalo ao desmontar o componente
     }, [rodando]);

@@ -12,8 +12,13 @@ export const CurrentContext = createContext({
   histDados: null,
   setListaDouble: () =>{},
   listaDouble: null,
-  refresh: null, 
   setRefresh: () => {},
+  refresh: null, 
+  setGirarCarousel: () => {},
   girarCarousel: null,
-  setGirarCarousel: () => {}
+   
+  setAssociacoes: ()=>{},
+  associacoes: null, 
+  setTrava: () =>{},
+  trava: null
 });

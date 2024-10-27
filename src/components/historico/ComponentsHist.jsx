@@ -1,16 +1,19 @@
 import { CurrentContext } from "../../context/themeContext"
 import ContentBots from "./bots/ContentBots"
 import { useContext, useEffect, useState } from "react"
+import { nomes } from "./bots/nomes";
+
 let contRed = 0;
 let contBlack = 0;
 let contWhite = 0;
 
 export default function ComponentsHist() {
-    const { histDados, girarCarousel, refresh } = useContext(CurrentContext);
+    const {trava, associacoes, setAssociacoes, histDados, girarCarousel, refresh } = useContext(CurrentContext);
     const [apostasRed, setApostasRed] = useState([]);
     const [apostasBlack, setApostasBlack] = useState([]);
     const [apostasWhite, setApostasWhite] = useState([]);
-
+    const [nomesDisponiveis, setNomesDisponiveis] = useState(nomes);
+    const[teste, setTeste] = useState(false)
     function ordenaVetor(vetor) {
         // Ordena o vetor de forma decrescente
         return [...vetor].sort((a, b) => b - a);
@@ -20,10 +23,16 @@ export default function ComponentsHist() {
         contRed = 0;
         contBlack = 0;
         contWhite = 0;
+        console.log("associassoes: ", associacoes)
+        // setAssociacoes([])
     },[histDados])
 
+    useEffect(()=>{
+        // console.log('apostas red: ', apostasRed)
+    },[apostasRed])
+
     useEffect(() => {
-        if(girarCarousel){return}
+        if(girarCarousel || trava){contRed = 0;return}
         const intervalRed = setInterval(() => {
             const numeroRed = Math.floor(Math.random() * 100000) + 10 - Math.floor(Math.random() * 100000) + 10;
             
@@ -35,6 +44,23 @@ export default function ComponentsHist() {
                     contRed++;
                     novoArray = [numeroRed, ...prevDados.slice(0, 8)];
                 }
+
+                // Sorteia um nome aleatório da lista disponível
+                if (nomesDisponiveis.length > 0) {
+                    const indiceNomeAleatorio = Math.floor(Math.random() * nomesDisponiveis.length);
+                    const nomeSorteado = nomesDisponiveis[indiceNomeAleatorio];
+
+                    // Remove o nome sorteado da lista de disponíveis
+                    const novosNomesDisponiveis = nomesDisponiveis.filter((_, index) => index !== indiceNomeAleatorio);
+                    setNomesDisponiveis(novosNomesDisponiveis);
+
+                    // Adiciona a nova associação ao estado de associações
+                    setAssociacoes(prevAssociacoes => [
+                        { numeroRed: numeroRed, nomeRed: nomeSorteado },
+                        ...prevAssociacoes
+                    ]);
+                }
+
                 return ordenaVetor(novoArray);
             });
         }, Math.floor(Math.random() * 350) + 200);
@@ -43,8 +69,11 @@ export default function ComponentsHist() {
     }, [girarCarousel]);
 
     useEffect(() => {
-        if(girarCarousel){return}
-
+        if(girarCarousel || trava){
+            console.log('tempo parada');
+            contWhite = 0;
+            return
+        }
         const intervalWhite = setInterval(() => {
             const numeroWhite = Math.floor(Math.random() * 100000) + 10;
 
@@ -56,6 +85,23 @@ export default function ComponentsHist() {
                     contWhite++;
                     novoArray = [numeroWhite, ...prevDados.slice(0, 8)];
                 }
+
+                // Sorteia um nome aleatório da lista disponível
+                if (nomesDisponiveis.length > 0) {
+                    const indiceNomeAleatorio = Math.floor(Math.random() * nomesDisponiveis.length);
+                    const nomeSorteado = nomesDisponiveis[indiceNomeAleatorio];
+
+                    // Remove o nome sorteado da lista de disponíveis
+                    const novosNomesDisponiveis = nomesDisponiveis.filter((_, index) => index !== indiceNomeAleatorio);
+                    setNomesDisponiveis(novosNomesDisponiveis);
+
+                    // Adiciona a nova associação ao estado de associações
+                    setAssociacoes(prevAssociacoes => [
+                        { numeroWhite: numeroWhite, nomeWhite: nomeSorteado },
+                        ...prevAssociacoes
+                    ]);
+                }
+
                 return ordenaVetor(novoArray);
             });
         }, Math.floor(Math.random() * 250) + 100);
@@ -64,7 +110,7 @@ export default function ComponentsHist() {
     }, [girarCarousel]);
 
     useEffect(() => {
-        if(girarCarousel){return}
+        if(girarCarousel || trava){contBlack = 0; return}
 
         const intervalBlack = setInterval(() => {
             const numeroBlack = Math.floor(Math.random() * 100000) + 10;
@@ -77,6 +123,23 @@ export default function ComponentsHist() {
                     contBlack++;
                     novoArray = [numeroBlack, ...prevDados.slice(0, 8)];
                 }
+
+                // Sorteia um nome aleatório da lista disponível
+                if (nomesDisponiveis.length > 0) {
+                    const indiceNomeAleatorio = Math.floor(Math.random() * nomesDisponiveis.length);
+                    const nomeSorteado = nomesDisponiveis[indiceNomeAleatorio];
+
+                    // Remove o nome sorteado da lista de disponíveis
+                    const novosNomesDisponiveis = nomesDisponiveis.filter((_, index) => index !== indiceNomeAleatorio);
+                    setNomesDisponiveis(novosNomesDisponiveis);
+
+                    // Adiciona a nova associação ao estado de associações
+                    setAssociacoes(prevAssociacoes => [
+                        { numeroBlack: numeroBlack, nomeBlack: nomeSorteado },
+                        ...prevAssociacoes
+                    ]);
+                }
+
                 return ordenaVetor(novoArray); // Certifique-se de que ordenaVetor é uma função válida
             });
         }, Math.floor(Math.random() * 200) + 100);
@@ -88,19 +151,30 @@ export default function ComponentsHist() {
     return (
         <div className="historico-components-wrapper">
             <div className="historico-component">
-                <h2>Vitória 2X</h2>
-                <ContentBots apostas={apostasBlack} />
-                <div><h1>+{contBlack} jogadores</h1></div>
+                <div className="title">
+                    <div className="simbol-red"></div>
+                    <div className="type">Vitória 2X</div>
+                </div>
+                <ContentBots apostas={apostasRed} nome={'red'}/>
+                <div className="nome-user"><h2>+{contRed} jogadores</h2></div>
             </div>
+            
             <div className="historico-component">
-                <h2>Vitória 14X</h2>
-                <ContentBots apostas={apostasWhite} />
-                <div><h1>+{contWhite} jogadores</h1></div>
+                <div className="title">
+                    <div className="simbol-white"></div>
+                    <div className="type">Vitória 14X</div>
+                </div>
+                <ContentBots apostas={apostasWhite}  nome={'white'}/>
+                <div className="nome-user"><h2>+{contWhite} jogadores</h2></div>
             </div>
+
             <div className="historico-component">
-                <h2>Vitória 2X</h2>
-                <ContentBots apostas={apostasRed} />
-                <div><h1>+{contRed} jogadores</h1></div>
+                <div className="title">
+                    <div className="simbol-black"></div>
+                    <div className="type">Vitória 2X</div>
+                </div>
+                <ContentBots apostas={apostasBlack} nome={'black'} />
+                <div className="nome-user"><h2>+{contBlack} jogadores</h2></div>
             </div>
         </div>
     );

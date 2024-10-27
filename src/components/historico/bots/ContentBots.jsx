@@ -1,424 +1,180 @@
 import { useContext, useEffect, useState } from "react";
 import './bots.css'
 import { CurrentContext } from "../../../context/themeContext";
+
 let cont = 0
 
-export default function ContentBots({apostas}){
-    const {girarCarousel, histDados, refresh, setRefresh} = useContext(CurrentContext)
-    const [apostasLocal, setApostas] = useState(apostas);
-    const nomes = [
-        "Conta no Orkut",
-        "Nu Sertão",
-        "SóXanaEAgua",
-        "SawMasBom",
-        "Dapra20comer",
-        "NinguémJooga",
-        "TatyComendo",
-        "Tokagando",
-        "Uhpapaichegou",
-        "Intez Tino",
-        "Cruizcredo",
-        "Flamengolol",
-        "Lord fralda",
-        "SeuVagem",
-        "Avestruz que te seduz",
-        "Ouro que reluz",
-        "Melado de óleo",
-        "Tentei Comer quem leu",
-        "Beijosmeliga",
-        "Headshot grátis",
-        "Sem Bala",
-        "CertouMiseravi",
-        "Naum Amola",
-        "Cavalo amigável",
-        "Morreu antes de ler",
-        "100Nome",
-        "TudoSpam",
-        "Kharne Greylhada",
-        "Sniper Boleto",
-        "Capa Nera",
-        "BatataSozinha",
-        "FeraSokeRuim",
-        "Amortyzador",
-        "Parcyal Mente",
-        "VlogImundo",
-        "MortoComoFace",
-        "After Eita",
-        "Erro 504",
-        "PuleiMorri",
-        "iRuim 2.0",
-        "LaggandoD+",
-        "LixoDeQualidade",
-        "Pirarucu Seboso",
-        "MeusProbrema",
-        "NickO Riginal",
-        "ArsenalFunkeiro",
-        "Rato Atomico",
-        "Bispo Pelado",
-        "Pablo Escovando",
-        "Byata R3zando",
-        "Cabo Nero",
-        "Bruxopolis",
-        "Sou1abismo",
-        "Adaptoide",
-        "DiegoDanger",
-        "Dildo Baggins",
-        "Riddickulo",
-        "Vinho de Diezel",
-        "Ze Morteiro",
-        "Juan Casavelha",
-        "Sayan Casual",
-        "MineirodeChernobil",
-        "Rick Jaimes",
-        "Tirona Lapela",
-        "JovemMistico",
-        "Urso Vago",
-        "MonkeeFeice",
-        "Major Morte",
-        "Tone Yorke",
-        "Fredo Mercurio",
-        "Davyd Boyeae",
-        "Ivete Comgalo",
-        "Eilish Rijinha",
-        "Atom JobineAce",
-        "Adonis",
-        "Badboy",
-        "Bam Bam",
-        "Bear",
-        "Beast",
-        "Beef",
-        "Biggie",
-        "Boner",
-        "Boss",
-        "Cowboy",
-        "Daddy",
-        "Elmo",
-        "Gasoline",
-        "Gangster",
-        "Gizmo",
-        "Godzilla",
-        "Grandpa",
-        "Grasshopper",
-        "Handsome",
-        "Harvard",
-        "Hero",
-        "Hercules",
-        "Hollywood",
-        "Hoss",
-        "Hunk",
-        "Jedi",
-        "Macho",
-        "Mayhem",
-        "Motown",
-        "Monster",
-        "Moose",
-        "Muscle",
-        "Nemo",
-        "Pickle",
-        "Player",
-        "Poker",
-        "Pooh",
-        "Pops",
-        "Prince",
-        "Pup",
-        "Rockstar",
-        "Romeo",
-        "Scooter",
-        "Skipper",
-        "Sparkie",
-        "Superfly",
-        "Teddy",
-        "Tiger",
-        "Train",
-        "Turtle",
-        "Vegas",
-        "Waldo",
-        "Winner",
-        "Cachorrão",
-        "Gustavo da 12",
-        "AnaChe",
-        "Gironda",
-        "Melissagata",
-        "Aquidisgraça",
-        "Martaonde",
-        "Severinnis",
-        "Diegostore",
-        "LucasLucão",
-        "Armigoonline",
-        "Catlucia",
-        "Tonymarrento",
-        "Deuonda",
-        "Metira",
-        "Akinori",
-        "Thor",
-        "Maximus",
-        "Exterminator",
-        "Overtaker",
-        "Naoki",
-        "Sniper",
-        "RockyBalboa",
-        "Jaguar",
-        "Torpedo",
-        "Hazzard",
-        "Satoshi",
-        "Scorpion",
-        "Mcgregor",
-        "Cobra",
-        "Falcão",
-        "Prodigy",
-        "Zombie",
-        "Napoleon",
-        "Coyote",
-        "Rocks",
-        "Whiskey",
-        "CRMessi",
-        "Go cu",
-        "Painkiller",
-        "Leon",
-        "Kitsune",
-        "Massacry",
-        "Goblete",
-        "TurboSquat",
-        "HangLoose",
-        "Mainframe",
-        "CyberMancer",
-        "Flint",
-        "Pehkonen",
-        "Sir Mavros",
-        "PointlessShot",
-        "Salty BR",
-        "PanzerLow",
-        "TrapTok",
-        "ScourgeWolf",
-        "SkyLord",
-        "Drakkoo",
-        "Guacanarix",
-        "Anaphylaxis",
-        "Claverol",
-        "Ronak",
-        "Thunder Cloak",
-        "Nygrum",
-        "Alcatrax",
-        "Black Lot",
-        "Othalium",
-        "Onyx Stryker",
-        "Braquialys",
-        "Crixos",
-        "HydroSnake",
-        "CTrlAltSNiper",
-        "Crassus",
-        "Baron Zemek",
-        "Rifleman AT",
-        "HeatSyka",
-        "Ariete Aereo",
-        "BlackHearth",
-        "Brock Blast",
-        "Blood Vessel",
-        "IceBerry",
-        "Sakano",
-        "Ahlkemysta",
-        "SuzukiSamurai",
-        "Tenso",
-        "TreeSensa",
-        "TheRAM",
-        "Pinkie",
-        "Alpina Aster",
-        "Magahis",
-        "Gale",
-        "Nacht",
-        "Nebel",
-        "GrrrlPowa",
-        "Polly Rocket",
-        "ValsinhaVeneno",
-        "Sara Sahara",
-        "MoçaTaDiferente",
-        "Cover Girl",
-        "Girllirla",
-        "NinjaKawai",
-        "ByancaNoir",
-        "Aguja",
-        "Mika",
-        "Nathy",
-        "BeClare",
-        "Maya",
-        "Aziza",
-        "Ostarha",
-        "Labirinto de Pandora",
-        "PinaColada",
-        "Tempestade de Amor",
-        "Sniper do Lar",
-        "Girassol",
-        "Cheetara",
-        "Sheera",
-        "Dona Flor",
-        "PanificadoraOmega",
-        "Menina Ideal",
-        "Caramelo",
-        "Aurora Aboreal",
-        "Debie",
-        "Bayssa",
-        "Athenas",
-        "Isis",
-        "Olimpia",
-        "Gaia",
-        "Eris",
-        "Gueidy",
-        "Europa",
-        "Clyrene",
-        "Erika",
-        "Javalina",
-        "Katana",
-        "Katrielly",
-        "Themis",
-        "Harmonia",
-        "Ártemis",
-        "RainGurl",
-        "DropHottie",
-        "Mihano",
-        "PukkaPie",
-        "IrisAzul",
-        "Rosae",
-        "Cardi C",
-        "StutterBling",
-        "R4taZana",
-        "Barnacula",
-        "BlekKween",
-        "Strygga",
-        "Razorina",
-        "Blinka182",
-        "BloodShed",
-        "Urtyga",
-        "CalfKilla",
-        "SteinCastle",
-        "CoachWhip",
-        "Cypher",
-        "Dial Murder",
-        "Spectrum",
-        "Amon Ka",
-        "Moonstar",
-        "DarkCyfra",
-        "DeathTrap",
-        "LifeLyne",
-        "Navalha",
-        "Foice",
-        "Titannia",
-        "Britania",
-        "Magmana",
-        "Dagan",
-        "Astrid",
-        "Dhova",
-        "Draconair",
-        "DragumEst",
-        "Stillaks",
-        "Parthunax",
-        "Tigris Unum",
-        "Magnus",
-        "Albicastrum",
-        "Hiborian",
-        "Celtibero",
-        "Octonumbra",
-        "Pyrite",
-        "Mholag Bal",
-        "Corruptor",
-        "Flavis",
-        "Slarver",
-        "Slayer",
-        "Scorch",
-        "Mogg",
-        "Hunter",
-        "Mage",
-        "Divine",
-        "Arrow",
-        "Shiryu",
-        "Suprem",
-        "Phoenix",
-        "Legendary",
-        "Instinct",
-        "Tears",
-        "Envyus",
-        "Rising",
-        "Immortal",
-        "Warlock",
-        "ClashforCash",
-        "Reaper",
-        "Pantheon",
-        "Maxthon",
-        "Executor",
-        "BloodFlare",
-        "Summoners",
-        "HawkEye",
-        "JunkieX",
-        "SlothKing",
-        "Gutzilla",
-        "Yoda",
-        "Kanabo",
-        "Shekelzak",
-        "Hexanorte",
-        "SunPrism",
-        "Derfenders",
-        "BuracoBarro",
-        "Takomito",
-        "Metamorfo",
-        "VenenoTox",
-        "BigTurtle",
-        "TrollOfc",
-        "Goblinskin",
-        "HydroBlitz",
-        "GaviãoX",
-        "Bravox",
-        "Superesmalte",
-        "LigaLoka",
-        "Metanix",
-        "DribbleRush",
-        "AfroSMH",
-        "ForageLeo",
-        "CativaCarton",
-        "Saracura",
-        "DashiPrim",
-        "InferBunt",
-        "MetroMetro",
-        "MelmanDaSelva",
-        "Sorveteria",
-        "DomYurr",
-        "SortimoBeng",
-        "Letas Cansadas",
-        "Piranhão",
-        "Muninn",
-        "LeitoVirus",
-        "RockPeroxide",
-        "SucrilhoPerseguidor",
-        "AquaCalliope",
-        "Invocaterra",
-        "Arigolips"
-      ];
+export default function ContentBots({apostas, nome}){
+    const {trava, setAssociacoes, setTrava, associacoes ,girarCarousel, histDados, refresh, setRefresh} = useContext(CurrentContext)
+    const [apostasLocal, setApostas] = useState([]);
+    const [libera, setLibera] = useState(true)
+    const [ganhou, setGanhou] = useState(false)
+    useEffect(()=>{
+        // console.log('associacoesRed: ', associacoes)
+    },[associacoes])
+
     useEffect(() => {
-        if (girarCarousel) {
-            setApostas([]); // Limpa o estado apostas
-
-            const timeoutId = setTimeout(() => {
-                console.log('deve resetar tudo agora', apostasLocal);
-                console.log("refresh", refresh);
-                setApostas(apostasLocal); // Redefine o estado apostas após 1.5s
-            }, 1500); // 1.5 segundos de delay
-
-            // Cleanup do timeout
-            return () => clearTimeout(timeoutId);
+        // console.log('trava: ', trava)
+        if (trava) {
+            return;
         }
+        setApostas(apostas); // Limpa o estado apostas
+            // console.log('deve resetar tudo agora', apostasLocal);
+            // console.log("trava", trava);
+        // console.log('apostas: ', apostas)
         
     }, [girarCarousel, apostas]);
+
+
+    const obterNomeAssociado = (numeroAposta) => {
+        for (const associacao of associacoes) {
+            if (associacao.numeroWhite === numeroAposta) {
+                return associacao.nomeWhite;
+            }
+            if (associacao.numeroBlack === numeroAposta) {
+                return associacao.nomeBlack;
+            }
+            if (associacao.numeroRed === numeroAposta) {
+                return associacao.nomeRed;
+            }
+        }
+        return "Nome não encontrado"; // Caso não encontre o número
+    };
+    
+    // Função para resetar a cor de fundo dos elementos
+function resetColor(className) {
+    const elementos = document.getElementsByClassName(className);
+
+    // Itera por todos os elementos e muda a cor de fundo para a cor original
+    for (let i = 0; i < elementos.length; i++) {
+        elementos[i].style.backgroundColor = 'rgb(20, 22, 32)';
+    }
+}
+
+function victory(className){
+    setGanhou(true)
+    setTrava(true)
+    const elementos = document.getElementsByClassName(className);
+
+    // Itera por todos os elementos e muda a cor de fundo para vermelho
+    for (let i = 0; i < elementos.length; i++) {
+        elementos[i].style.backgroundColor = 'green';
+        // const valores = apostasLocal.slice(0, 8)
+        // const novosValores = valores.map(item => item * 2);
+        // setApostas(novosValores);
+    }
+    
+    const timeoutId = setTimeout(() => {
+        setLibera(false)
+        reset()
+        
+    }, 6000); // 3 segundos de delay
+
+    // Cleanup do timeout
+    return () => clearTimeout(timeoutId);
+}
+
+function reset(){
+    // console.log('deve resetar tudo agora', apostasLocal);
+    
+    setTrava(false)
+    const timeoutId = setTimeout(() => {
+        setLibera(true)
+        
+    }, 1300); // 3 segundos de delay
+
+    // Cleanup do timeout
+    return () => clearTimeout(timeoutId);
+}
+
+// Função para esperar um tempo antes de resetar a cor
+function esperaTime(className) {
+    
+    const timeoutId = setTimeout(() => {
+        resetColor(className);
+        setLibera(false)
+        reset()
+    }, 6000); // 3 segundos de delay
+
+    // Cleanup do timeout
+    return () => clearTimeout(timeoutId);
+}
+
+// Função para mudar a cor dos elementos para vermelho
+function setColor(className) {
+    setTrava(true)
+    setGanhou(false)
+    const elementos = document.getElementsByClassName(className);
+
+    // Itera por todos os elementos e muda a cor de fundo para vermelho
+    for (let i = 0; i < elementos.length; i++) {
+        elementos[i].style.backgroundColor = 'red';
+    
+    }
+}
+
+// useEffect ajustado
+useEffect(() => {
+
+    if (nome === 'red') {
+        if (histDados[0] > 7 && histDados[0] !== 20) {
+            // console.log('vermelho perdeu');
+            setColor('red');
+            esperaTime('red');
+        } else if (histDados[0] <= 7) {
+            console.log('vitória do vermelho');
+            victory(nome)
+        } else {
+            // console.log('vermelho perdeu');
+            setColor('red');
+            esperaTime('red');
+        }
+    } 
+    else if (nome === 'white') {
+        if (histDados[0] > 7 && histDados[0] !== 20) {
+            // console.log('white perdeu');
+            setColor('white');
+            esperaTime('white');
+        } else if (histDados[0] <= 7) {
+            // console.log('white perdeu');
+            setColor('white');
+            esperaTime('white');
+        } else {
+            console.log('vitória do white');
+            victory(nome)
+        }
+    }
+    else if (nome === 'black') {
+        if (histDados[0] > 7 && histDados[0] !== 20) {
+            console.log('vitória do black');
+            victory(nome)
+        } else if (histDados[0] <= 7) {
+            // console.log('black perdeu');
+            setColor('black');
+            esperaTime('black');
+        } else {
+            // console.log('black perdeu');
+            setColor('black');
+            esperaTime('black');
+        }
+    }
+}, [histDados]);
+
     return(
         <div className="container-apostas" >
-            { 
-                
-                apostas.map((item, index) => (
+            { libera &&
+                apostasLocal.map((item, index) => (
                     <div key={index}>
-                        <div className='bot-hist'>
-                           <div className="nomes-user">{nomes[Math.floor(Math.random() * 300) + 0]}</div> <h3> R${item}</h3>
+                        <div className={`bot-hist ${nome}`}>
+                           <div className="nomes-user">
+                            {obterNomeAssociado(item)}
+                            </div> 
+                            
+                            <h3> {!ganhou ? `R${item}` : `R${item * 2}`}</h3>
                         </div>
                     </div>
                 ))
-            }
-            
+            }     
         </div>
     )
 }
