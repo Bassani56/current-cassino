@@ -1,0 +1,52 @@
+.app-dash {
+    height: 100vh; /* Preenche 100% da altura da tela */
+    background-color: rgb(42, 16, 128);
+    /* background-color: blanchedalmond; */
+    display: flex; /* Define como flex container */
+    flex-direction: column; /* Exibe os itens verticalmente */
+    gap: 20px; /* Espaçamento vertical de 20px entre os itens */
+}
+
+.sub-app-dash{
+    margin-top: 16px;
+    height: 100%;
+}
+
+.sub-context {
+    /* background-color: #1a242d; */
+    width: 1072px;
+    height: 300px;
+    border-radius: 2px;
+    /* padding: 10px; */
+    margin: 50px auto; /* Centraliza o contêiner */
+    display: flex;
+    justify-content: space-between; /* Espaça as divs coladas nas bordas */
+    align-items: center;
+    gap: 0px; /* Espaço entre as divs */
+}
+
+.square-context {
+    width: 48.5%;
+    height: 100%;
+    background-color: #1a242d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    padding-left: 50px;
+    padding-right: 120px;
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho total da div */
+}
+
+.button-go-cassino{
+    width: 105px;
+    background-color: rgb(241, 44, 76);
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+h1, h2, h3, h4{
+    color: rgb(221, 216, 210);
+}

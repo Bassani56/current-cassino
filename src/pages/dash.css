@@ -1,0 +1,171 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+}
+.overlay-double{
+    
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(24, 11, 11); /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center; /* Centraliza o modal horizontalmente */
+    align-items: center; /* Centraliza o modal verticalmente */
+    flex-direction: column;
+    border: 0.8px solid rgb(67, 68, 77);
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
+.content-double {
+    background: rgb(117, 103, 103); /* Fundo branco do modal */
+    box-shadow: 0 2px 10px rgba(179, 133, 133, 0.1);
+     /* Opcional: adiciona bordas arredondadas ao modal */
+     height: 450px;
+     width: calc(735px + 325px);
+     display: flex;
+     border: 0.8px solid rgb(67, 68, 77);
+    box-sizing: border-box;
+}
+
+.left{
+    background-color: #1a242d;
+    width: 325px;
+    z-index: 1000;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.8px solid rgb(67, 68, 77);
+    box-sizing: border-box;
+}
+
+.right{
+    background-color: #1a242d;
+    width: 747px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.up{
+    background-color: rgb(24, 11, 11);
+    height: 353px;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+    border: 0.8px solid rgb(67, 68, 77);
+    box-sizing: border-box;
+}
+
+    .container-tempo{
+        padding-right: 10px;
+        padding-left: 10px;
+        box-sizing: border-box;
+       
+    }
+   .espera{
+     margin-top: 20px;
+     width: 680px;
+     background-color: #1a242d;
+     height: 38px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     
+   }
+      .tempo{
+        background-color: red;
+        height: 22px;
+        width: 640px;
+      }
+
+.down{
+    background-color: #187ed8;
+    height: calc(450px - 353px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.down h3{
+    background-color: #1a242d;
+    height: 26px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+
+.hist-dados-jogo{
+    display: flex;
+    flex-direction: row;
+    gap: 13px;
+}
+
+.depositar{
+    width: 105px;
+    background-color: rgb(241, 44, 76);
+    border-radius: 5px;
+    color: aliceblue;
+    font-size: medium;
+    height: 50px;
+}
+
+.logout{
+    width: 65px;
+    background-color: rgb(68, 65, 65);
+    border-radius: 5px;
+    color: aliceblue;
+    font-size: medium;
+    height: 50px;
+}
+
+.value{
+    background-color: aliceblue;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.historico-container {
+    background-color: #1a242d;
+    width: 1060px;
+    height: 738px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Coloca os itens em coluna */
+    gap: 0px; /* Espaçamento entre o h1 e os componentes */
+}
+
+.historico-container h1 {
+    margin-top: 0px;
+    color: #6087a8;
+    text-align: center; /* Centraliza o h1 */
+}
+
+.historico-components-wrapper {
+    display: flex;
+    justify-content: space-between; /* Distribui os componentes horizontalmente */
+    gap: 10px; /* Espaço entre os componentes */
+}
+
+.historico-component {
+    background-color: rgb(94, 67, 67);
+    width: 310px;
+    height: 680px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.historico-component h2{
+    margin-bottom: 0;
+}
+

@@ -1,0 +1,17 @@
+.header, .menu{
+    background-color: rgb(11, 2, 52);
+    height: 6vh;
+    text-align: center;
+}
+
+#button-entrar{
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgb(24, 132, 9);
+}
+
+#button-cadastrar{
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgb(244, 44, 76);
+}

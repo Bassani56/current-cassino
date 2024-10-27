@@ -1,0 +1,19 @@
+.carousel-container{
+    background-color: black;
+    width: 747px;
+    margin-top: 18%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.traco {
+    width: 5px;
+    height: 160px;
+    background-color: rgb(101, 185, 44);
+    position: absolute; /* Faz com que a div se sobreponha */
+    top: 45%; /* Ajuste conforme a necessidade */
+    left: 505; /* Ajuste conforme a necessidade */
+    z-index: 10; /* Controla a ordem de sobreposição */
+}

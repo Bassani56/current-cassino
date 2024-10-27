@@ -1,0 +1,63 @@
+.modal-span {
+    position: fixed; /* Fixa o modal na tela */
+    top: 0;
+    left: 0; /* Adiciona left para garantir que ocupe toda a tela */
+    right: 0; /* Adiciona right para garantir que ocupe toda a tela */
+    bottom: 0; /* Ocupa toda a altura da tela */
+    background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center; /* Centraliza o modal horizontalmente */
+    align-items: center; /* Centraliza o modal verticalmente */
+    z-index: 1000; /* Garante que o modal fique acima de outros elementos */
+}
+
+.modal-content-span {
+    width: 400px; /* Largura do modal */
+    padding: 20px;
+    background: #fff; /* Fundo branco do modal */
+    border-radius: 10px; /* Borda arredondada */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
+    position: relative; /* Para posicionar o botão de fechar */
+}
+
+.modal-title {
+    font-size: 24px; /* Tamanho da fonte do título */
+    color: #d9534f; /* Cor do título */
+    margin: 0; /* Remove margens */
+    text-align: center; /* Centraliza o texto */
+}
+
+.modal-message {
+    font-size: 16px; /* Tamanho da fonte da mensagem */
+    color: #333; /* Cor do texto da mensagem */
+    text-align: center; /* Centraliza o texto */
+    margin: 10px 0; /* Margens em cima e embaixo */
+}
+
+.close-button {
+    position: absolute; /* Posiciona o botão de fechar */
+    top: 10px; /* Distância do topo */
+    right: 10px; /* Distância da direita */
+    border: none; /* Remove borda */
+    background: transparent; /* Fundo transparente */
+    font-size: 24px; /* Tamanho do botão */
+    cursor: pointer; /* Muda o cursor para pointer */
+    color: #333; /* Cor do botão */
+}
+
+.confirm-button {
+    display: block; /* Faz o botão ocupar a largura total */
+    margin: 20px auto 0; /* Margem automática nas laterais */
+    padding: 10px 20px; /* Espaçamento do botão */
+    font-size: 16px; /* Tamanho da fonte do botão */
+    color: #fff; /* Cor do texto */
+    background-color: #d9534f; /* Cor de fundo do botão */
+    border: none; /* Remove borda */
+    border-radius: 5px; /* Borda arredondada do botão */
+    cursor: pointer; /* Muda o cursor para pointer */
+    transition: background-color 0.3s; /* Transição suave na mudança de cor */
+}
+
+.confirm-button:hover {
+    background-color: #c9302c; /* Cor do botão ao passar o mouse */
+}

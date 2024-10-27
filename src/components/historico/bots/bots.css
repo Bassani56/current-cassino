@@ -1,0 +1,31 @@
+.container-apostas{
+    background-color: antiquewhite;
+    width: 90%;
+    height: 88%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+}
+
+.bot-hist{
+    height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #202232;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.bot-hist h3{
+    color: aliceblue;
+}
+
+.nomes-user{
+    color: azure;
+    /* background-color: blueviolet; */
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+}

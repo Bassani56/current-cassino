@@ -1,0 +1,23 @@
+.roulette-container {
+    position: relative;
+    overflow: hidden; /* Oculta os itens que saem do contêiner */
+    width: 300px; /* Largura do contêiner */
+    height: 100px; /* Altura do contêiner */
+    margin: 0 auto; /* Centraliza o contêiner */
+}
+
+.roulette {
+    display: flex; /* Flex para alinhar itens horizontalmente */
+    transition: transform 0.5s ease-in-out; /* Suaviza a transição */
+}
+
+.roulette-item {
+    min-width: 100%; /* Cada item ocupa 100% do contêiner */
+    height: 100%; /* Altura do item */
+    display: flex; /* Flex para centralizar conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    background-color: #f0f0f0; /* Cor de fundo dos itens */
+    border: 1px solid #ccc; /* Borda dos itens */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra dos itens */
+}
