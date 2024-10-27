@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 
 export default function CursorTime() {
     const [rodando, setRodando] = useState(false);
-    const { girarCarousel, setGirarCarousel } = useContext(CurrentContext);
+    const {histDados, girarCarousel, setGirarCarousel } = useContext(CurrentContext);
     const [width, setWidth] = useState(690); // largura inicial
     const [tempo, setTempo] = useState(15); // inicializa com 15 segundos
 
@@ -28,12 +28,13 @@ export default function CursorTime() {
             setRodando(true); // Para a animação quando a largura chega a zero
             setGirarCarousel(true);
             
-            // Espera 6 segundos antes de reiniciar a largura
+            // Espera 6 segundos antes de reiniciar a largura e o tempo
             const timeout = setTimeout(() => {
+                setTempo(15); // Reinicia o tempo
                 setWidth(690); // Reinicia a largura
                 setRodando(false); // Reinicia a animação
                 setGirarCarousel(false);
-                setTempo(15); // Reinicia o tempo
+                
             }, 6000); // 6000 milissegundos = 6 segundos
 
             // Limpa o timeout se o componente for desmontado ou se width mudar antes de 6 segundos
@@ -54,9 +55,11 @@ export default function CursorTime() {
         }, 1000); // Decrementa a cada 1 segundo
 
         return () => clearInterval(intervalTempo); // Limpa o intervalo ao desmontar o componente
-    }, []);
+    }, [histDados]); // Esta dependência vazia significa que o intervalo é criado apenas uma vez ao montar
 
     return (
-        <div className='tempo' style={{ width: `${width}px` }}>{tempo !== -1 && tempo}</div>
+        <div className='tempo' style={{ width: `${width}px` }}>
+            {tempo >= 0 ? tempo : ''} {/* Exibe mensagem se o tempo chegar a zero */}
+        </div>
     );
 }
