@@ -59,7 +59,7 @@ export default function CursorTime() {
 
     return (
         <div className='tempo' style={{ width: `${width}px` }}>
-            {tempo >= 0 ? tempo : ''} {/* Exibe mensagem se o tempo chegar a zero */}
+                <div style={{position: 'fixed' ,zIndex: '1000'}}>{tempo >= 0 ? ` Girando em ${tempo}` : 'Girando...'}</div> {/* Exibe mensagem se o tempo chegar a zero */}
         </div>
     );
 }
