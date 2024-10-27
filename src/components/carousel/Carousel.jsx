@@ -9,7 +9,7 @@ export default function Carousel(){
     return(
         <div className='carousel-container'>
             <Swiper>
-                <Slider  >
+                <Slider>
                     {children}
                 </Slider>
             </Swiper>

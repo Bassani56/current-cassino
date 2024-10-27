@@ -40,9 +40,9 @@ export default function Slider({ settings, children }) {
             {...settings} // Configurações do Swiper
             ref={swiperRef} // Armazena a referência do Swiper
             modules={[Navigation, Autoplay]} // Adicionando o Autoplay como módulo
-            spaceBetween={0}
+            spaceBetween={10}
             slidesPerView={7}
-            navigation={true}
+            // navigation={true}
             loop={true} // Habilita o loop infinito
             autoplay={{
                 delay: 100, // Pequeno delay para simular movimento rápido

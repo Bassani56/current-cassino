@@ -1,10 +1,12 @@
 .carousel-container{
     background-color: black;
-    width: 747px;
+    width: 740px;
     margin-top: 18%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 
