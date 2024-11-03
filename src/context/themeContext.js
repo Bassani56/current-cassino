@@ -20,5 +20,16 @@ export const CurrentContext = createContext({
   setAssociacoes: ()=>{},
   associacoes: null, 
   setTrava: () =>{},
-  trava: null
+  trava: null,
+
+  setValue: () => {},
+  value: null,
+  setUpdateValueState: ()=>{},
+  updateValueState: null,
+
+  setApostouState: () =>{},
+  apostouState: null,
+  
+  setColorState: () => {},
+  colorState: null
 });

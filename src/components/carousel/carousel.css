@@ -12,10 +12,10 @@
 
 .traco {
     width: 5px;
-    height: 160px;
-    background-color: rgb(101, 185, 44);
+    height: 150px;
+    background-color: rgb(243, 250, 238);
     position: absolute; /* Faz com que a div se sobreponha */
-    top: 45%; /* Ajuste conforme a necessidade */
+    top: 29%; /* Ajuste conforme a necessidade */
     left: 505; /* Ajuste conforme a necessidade */
     z-index: 10; /* Controla a ordem de sobreposição */
 }

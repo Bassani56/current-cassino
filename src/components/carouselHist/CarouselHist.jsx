@@ -13,22 +13,23 @@ export default function CarouselHist(){
             const numeroAleatorio = Math.floor(Math.random() * 15) + 1; // Gera um número aleatório entre 1 e 15
             setHistDados(prevDados => [numeroAleatorio, ...prevDados]);
             setRefresh(!refresh)
+            console.log('gerando numero aleatorio para o hist')
         }
     }, [girarCarousel]);
 
-    useEffect(() => {
-        if(numberHistory){
-            setHistDados(prev => [...prev, numberHistory]);
-        } // Adiciona numberHistory ao array
-    }, [numberHistory]);
+    // useEffect(() => {
+    //     if(numberHistory){
+    //         setHistDados(prev => [...prev, numberHistory]);
+    //     } // Adiciona numberHistory ao array
+    // }, [numberHistory]);
 
     useEffect(() => {
-        console.log('children: ', histDados); // Verifica o estado atualizado
+        // console.log('children: ', histDados); // Verifica o estado atualizado
     }, [histDados]); // Escuta mudanças no histDados
 
     return (
         <div className='carousel-container-hist'>
-            <SliderHist histDados={histDados}/>
+            <SliderHist/>
         </div>
     );
 }

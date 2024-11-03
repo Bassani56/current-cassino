@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 50px;
+    background-color:rgb(24, 11, 11)
 }
 .overlay-double{
     
@@ -15,7 +16,7 @@
     justify-content: center; /* Centraliza o modal horizontalmente */
     align-items: center; /* Centraliza o modal verticalmente */
     flex-direction: column;
-    border: 0.8px solid rgb(67, 68, 77);
+    /* border: 0.8px solid rgb(67, 68, 77); */
     box-sizing: border-box;
     z-index: 9999;
 }

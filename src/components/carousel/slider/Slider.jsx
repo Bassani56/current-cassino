@@ -7,10 +7,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Navigation, Autoplay } from 'swiper/modules'; // Importando Autoplay
 import { CurrentContext } from '../../../context/themeContext';
+import { json } from 'react-router-dom';
 
 export default function Slider({ settings, children }) {
     const swiperRef = useRef(null); // Cria uma referência para o Swiper
-    const {girarCarousel, histDados} = useContext(CurrentContext)
+    const {trava, setTrava, girarCarousel, setGirarCarousel} = useContext(CurrentContext)
     useEffect(() => {
         console.log('girar: ', girarCarousel);
     
@@ -18,21 +19,41 @@ export default function Slider({ settings, children }) {
             if (girarCarousel) {
                 swiperRef.current.swiper.autoplay.start(); // Inicia o autoplay
                  // Pára o autoplay após 4 segundos (4000ms)
+                //  console.log('CARROUSEL girando')
+                let number = Math.floor(Math.random() * (8000 - 2000 + 1)) + 2000
+                // console.log('number: ', JSON.stringify(number))
                 const timeout = setTimeout(() => {
                     if (swiperRef.current && swiperRef.current.swiper) {
                         swiperRef.current.swiper.autoplay.stop(); // Para o autoplay
-                        
+                        setGirarCarousel(false)
+                        setTrava(true)
+                        // console.log('travou aqui')
+                        const timeout = setTimeout(() => {
+                            setTrava(false)
+                            // console.log('des - travou aqui')
+                        }, 6000); 
+                        return () => clearTimeout(timeout);
                     }
-                }, Math.floor(Math.random() * (8000 - 3000 + 1)) + 3000); // Gera um número aleatório entre 3000 e 8000ms
+                    
+                }, number); // Gera um número aleatório entre 3000 e 8000ms
 
                 // Cleanup do timeout quando o componente desmontar
                 return () => clearTimeout(timeout);
-            } else {
-                swiperRef.current.swiper.autoplay.stop(); // Para o autoplay
+            } 
+            else { 
+                swiperRef.current.swiper.autoplay.stop();
+                // console.log('CARROUSEL PARADO AQUI VEI')
+                // setTrava(false)
             }
+            //     // const timeout = setTimeout(() => {
+            //     //     setGirarCarousel(false)
+            //     // }, 2000); // Gera um número aleatório entre 3000 e 8000ms
+
+            //     // // Cleanup do timeout quando o componente desmontar
+            //     // return () => clearTimeout(timeout);
+            // }
         }
 
-       
     }, [girarCarousel]);
 
     return (
@@ -55,7 +76,7 @@ export default function Slider({ settings, children }) {
                         className='square' 
                         style={{
                             background: 
-                                child === 20 ? 'white':
+                                child === 15 ? 'white':
                                 child < 8 ? 'red' : 
                                 'rgb(15, 25, 35)'
                         }}

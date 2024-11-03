@@ -1,0 +1,60 @@
+.container-modal-deposito{
+    background-color:rgb(73, 44, 44);
+    height: 260px;
+    width: 290px;
+    z-index: 99999;
+    position: fixed;
+    margin-left: 47%;
+    margin-bottom: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    gap: 10px;
+    border-radius: 4px;
+}
+
+.form-deposito{
+    background-color: blue;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 200px;
+    border-radius: 4px;
+}
+
+.valores-pix{
+    /* background-color: rgb(72, 127, 175); */
+    width: 270px;
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.pix-button{
+    width: 70px;
+    height: 40px;
+}
+
+
+
+.container-modal-deposito input{
+    background-color: aliceblue;
+    width: 270px;
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    justify-content: space-between;
+  
+    box-sizing: border-box;
+}
+
+.deposit-start{
+    width: 270px;
+    height: 30px;
+    border: 1px solid wheat;
+}

@@ -17,7 +17,7 @@ export default function Slider() {
         if (swiperInstance) {
             swiperInstance.update(); // Atualiza o Swiper sempre que histDados mudar
         }
-        console.log('Slider: ', histDados);
+        // console.log('Slider: ', histDados);
     }, [histDados, swiperInstance]);
 
     return (
@@ -28,12 +28,12 @@ export default function Slider() {
                             className='squareHist'
                             style={{
                                 background:
-                                    item === 20 ? 'white' :
+                                    item === 15 ? 'white' :
                                     item < 8 ? 'red' :
                                     item > 7 ? 'rgb(15, 25, 35)' : ''
                             }}
                         >
-                            {item}
+                            {item !== 15 && item}
                         </div>
                     </div>
                 ))}

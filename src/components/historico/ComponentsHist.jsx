@@ -8,7 +8,7 @@ let contBlack = 0;
 let contWhite = 0;
 
 export default function ComponentsHist() {
-    const {trava, associacoes, setAssociacoes, histDados, girarCarousel, refresh } = useContext(CurrentContext);
+    const {trava, associacoes, setAssociacoes, histDados, girarCarousel, refresh, colorState, setColorState } = useContext(CurrentContext);
     const [apostasRed, setApostasRed] = useState([]);
     const [apostasBlack, setApostasBlack] = useState([]);
     const [apostasWhite, setApostasWhite] = useState([]);
@@ -19,20 +19,24 @@ export default function ComponentsHist() {
         return [...vetor].sort((a, b) => b - a);
     }
 
-    useEffect(()=>{
-        contRed = 0;
-        contBlack = 0;
-        contWhite = 0;
-        console.log("associassoes: ", associacoes)
-        // setAssociacoes([])
-    },[histDados])
+    // useEffect(()=>{
+    //     contRed = 0;
+    //     contBlack = 0;
+    //     contWhite = 0;
+    //     console.log("associassoes: ", associacoes)
+    //     // setAssociacoes([])
+    // },[histDados])
 
     useEffect(()=>{
         // console.log('apostas red: ', apostasRed)
     },[apostasRed])
 
     useEffect(() => {
-        if(girarCarousel || trava){contRed = 0;return}
+        if(girarCarousel || trava){
+            // contRed = 0;
+            return
+        }
+        else if(!girarCarousel && !trava){
         const intervalRed = setInterval(() => {
             const numeroRed = Math.floor(Math.random() * 100000) + 10 - Math.floor(Math.random() * 100000) + 10;
             
@@ -66,14 +70,17 @@ export default function ComponentsHist() {
         }, Math.floor(Math.random() * 350) + 200);
 
         return () => clearInterval(intervalRed);
-    }, [girarCarousel]);
+    }
+    }, [girarCarousel, trava]);
 
     useEffect(() => {
         if(girarCarousel || trava){
-            console.log('tempo parada');
-            contWhite = 0;
+            // console.log('apostas paradas', "girarCarousel ", girarCarousel,"trava ",  trava);
             return
         }
+
+        else if(!girarCarousel && !trava){
+            console.log('CUIDADO MOVIMENTO INVOLUNTARIO', girarCarousel, trava)
         const intervalWhite = setInterval(() => {
             const numeroWhite = Math.floor(Math.random() * 100000) + 10;
 
@@ -107,11 +114,15 @@ export default function ComponentsHist() {
         }, Math.floor(Math.random() * 250) + 100);
 
         return () => clearInterval(intervalWhite);
-    }, [girarCarousel]);
+        }
+    }, [girarCarousel, trava]);
 
     useEffect(() => {
-        if(girarCarousel || trava){contBlack = 0; return}
-
+        if(girarCarousel || trava){
+            // contBlack = 0; 
+            return
+        }
+        else if(!girarCarousel && !trava){
         const intervalBlack = setInterval(() => {
             const numeroBlack = Math.floor(Math.random() * 100000) + 10;
 
@@ -146,7 +157,8 @@ export default function ComponentsHist() {
 
         // Cleanup do intervalo
         return () => clearInterval(intervalBlack);
-    }, [girarCarousel]);
+        }
+    }, [girarCarousel, trava]);
 
     return (
         <div className="historico-components-wrapper">

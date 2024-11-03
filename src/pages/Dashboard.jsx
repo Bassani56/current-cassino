@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import CarouselHist from '../components/carouselHist/CarouselHist';
 import ComponentsHist from '../components/historico/ComponentsHist';
 import CursorTime from '../components/time/CursorTempo';
-
+import Depositar from '../components/modal/Depositar';
 export default function Dashboards(){
 
     const [showModelRegister, setShowModelRegister] = useState(false);
@@ -35,25 +35,34 @@ export default function Dashboards(){
     // }, [playSound, stop]);
     const[histDados, setHistDados] = useState([])
     const[refresh, setRefresh] = useState(false)
-    const [associacoes, setAssociacoes] = useState([]);
+    const[associacoes, setAssociacoes] = useState([]);
     const[trava, setTrava] = useState(false)
-    
+    const[value, setValue] = useState(null)
+
+    const[open, setOpen] = useState(false)
     const navigate = useNavigate()
-    
+    const[updateValueState, setUpdateValueState] = useState(false)
+    const[apostouState, setApostouState] = useState(false)
+    const[colorState, setColorState] = useState(null)
+   
     return(
         <CurrentContext.Provider 
             value={{numberHistory, setNumberHistory, 
             showModelRegister, setShowModelRegister,
             histDados, setHistDados, listaDouble, setListaDouble,
             refresh, setRefresh, girarCarousel, setGirarCarousel,
-            associacoes, setAssociacoes, trava, setTrava}}
+            associacoes, setAssociacoes, trava, setTrava, value, setValue,
+            setUpdateValueState, updateValueState, apostouState, setApostouState, 
+            colorState, setColorState}}
         >
             <div className='dashboard' >
                 <Header>
-                    <div className='value'>R$-dinheiro</div>
-                    <button className='depositar' >Depositar</button>
+                    <div id='valor-atual' className='value'>R$-dinheiro</div>
+                    <button className='depositar' onClick={() => {setOpen(true)}} >Depositar</button>
                     <button className='logout' onClick={()=>{navigate("/")}} >Logout</button>
                 </Header>
+
+                <Depositar open={open} setOpen={setOpen}/>
 
                 <div className="overlay-double" >
                     {/* <h1>Bem vindos ao <strong>Bolazula</strong></h1> */}

@@ -10,7 +10,7 @@ import Bonus from "../components/home/Bonus"
 import  logo from '../components/img/bolso-lula.jpg'
 import Span from "../components/home/modal/spans/Spans"
 import { useNavigate } from "react-router-dom"
-import { supabase } from "../supabaseClient"
+
 export default function MenuRegistro(){
     const [showModelRegister, setShowModelRegister] = useState(false);
     const [showSpan, setShowSpan] = useState(false)
@@ -58,7 +58,5 @@ export default function MenuRegistro(){
                 </div>
             </ErrorBoundary>
         </CurrentContext.Provider>
-        
-
     )
 }

@@ -48,16 +48,19 @@
     background-color: aliceblue;
     width: 45px;
     height: 45px;
+    border-radius: 7px;
 }
 
 .simbol-red{
     background-color: red;
     width: 45px;
     height: 45px;
+    border-radius: 7px;
 }
 
 .simbol-black{
     background-color: black;
     width: 45px;
     height: 45px;
+    border-radius: 7px;
 }
