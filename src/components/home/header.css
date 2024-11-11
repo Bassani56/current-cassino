@@ -1,29 +1,39 @@
-.header{
-    background-color: rgb(11, 2, 52);
-    height: 6vh;
-    text-align: center;
+
+*{
+    text-decoration: none;
+}
+
+.navdiv{
+    background-color: rgb(57, 37, 145);
+    margin: 0.5%;
+    border-radius: 15px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.homediv {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
-.menu{
-    /* background-color: rgb(6, 52, 2); */
-    height: 6vh;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: c;
+.titlediv a { 
+    color: rgb(137, 255, 249);
+    font-size: 5em;
+    font-weight: bolder;
+    border-right-style: dashed;
+    padding-right: 50px;
 }
 
-#button-entrar{
-    height: 90%;
-    border-radius: 5px;
-    background-color: rgb(24, 132, 9);
-}
+.navbar {
+    list-style: none;
+    display: inline-flex;
+    li {
+        padding-right: 50px;
+    }
 
-#button-cadastrar{
-    height: 90%;
-    border-radius: 5px;
-    background-color: rgb(244, 44, 76);
+    a {
+        color: rgb(137, 255, 249);
+        font-size: 1.5em;
+    }
 }

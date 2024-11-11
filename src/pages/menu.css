@@ -1,6 +1,5 @@
 .app-dash {
     height: 100vh; /* Preenche 100% da altura da tela */
-    background-color: rgb(42, 16, 128);
     /* background-color: blanchedalmond; */
     display: flex; /* Define como flex container */
     flex-direction: column; /* Exibe os itens verticalmente */
@@ -49,4 +48,28 @@
 
 h1, h2, h3, h4{
     color: rgb(221, 216, 210);
+}
+
+.logindiv {
+    display: flex;
+    gap: 15px;
+
+    button{
+        padding: 1%;
+        width: 160px;
+        font-size: 1.5em;
+        font-weight: bolder;
+        border: none;
+        border-radius: 15px;
+    }
+}
+
+.signin-button{
+    background-color: rgb(24, 207, 0);
+    a { color: black; } /* Nao sei se vai precisar */
+}
+
+.signup-button{
+    background-color: rgb(255, 32, 81);
+    a { color: black; } /* Nao sei se vai precisar */
 }
