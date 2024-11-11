@@ -56,3 +56,9 @@
 .comecar-jogo .hover{
     background-color: blanchedalmond;
 }
+
+.quadros-option.active {
+    border: 2px solid yellow; /* Exemplo de destaque */
+    transform: scale(1.1); /* Aumenta o botão */
+    border-radius: 5px;
+  }

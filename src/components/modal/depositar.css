@@ -1,6 +1,6 @@
 .container-modal-deposito{
     background-color:rgb(73, 44, 44);
-    height: 260px;
+    min-height: 260px;
     width: 290px;
     z-index: 99999;
     position: fixed;
@@ -13,6 +13,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     gap: 10px;
     border-radius: 4px;
+    color: aqua;
 }
 
 .form-deposito{
@@ -57,4 +58,9 @@
     width: 270px;
     height: 30px;
     border: 1px solid wheat;
+}
+
+.item-hist{
+    background-color: rgb(30, 18, 41);
+    
 }

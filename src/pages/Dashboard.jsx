@@ -12,6 +12,8 @@ import CarouselHist from '../components/carouselHist/CarouselHist';
 import ComponentsHist from '../components/historico/ComponentsHist';
 import CursorTime from '../components/time/CursorTempo';
 import Depositar from '../components/modal/Depositar';
+import Transacoes from '../components/modal/Transações';
+
 export default function Dashboards(){
 
     const [showModelRegister, setShowModelRegister] = useState(false);
@@ -58,11 +60,11 @@ export default function Dashboards(){
             <div className='dashboard' >
                 <Header>
                     <div id='valor-atual' className='value'>R$-dinheiro</div>
-                    <button className='depositar' onClick={() => {setOpen(true)}} >Depositar</button>
+                    <button className='depositar' onClick={() => {setOpen(true)}} >Transações</button>
                     <button className='logout' onClick={()=>{navigate("/")}} >Logout</button>
                 </Header>
 
-                <Depositar open={open} setOpen={setOpen}/>
+                <Transacoes open={open} setOpen={setOpen}/>
 
                 <div className="overlay-double" >
                     {/* <h1>Bem vindos ao <strong>Bolazula</strong></h1> */}

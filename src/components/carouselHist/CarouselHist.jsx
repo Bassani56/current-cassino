@@ -6,14 +6,14 @@ import { useContext, useEffect } from 'react';
 import './carousel-hist.css'
 
 export default function CarouselHist(){
-    const{girarCarousel, histDados, refresh, setRefresh, setHistDados, numberHistory} = useContext(CurrentContext)
+    const{girarCarousel, histDados, refresh, setRefresh, setValue} = useContext(CurrentContext)
     
     useEffect(() => {
         if(!girarCarousel){
-            const numeroAleatorio = Math.floor(Math.random() * 15) + 1; // Gera um número aleatório entre 1 e 15
-            setHistDados(prevDados => [numeroAleatorio, ...prevDados]);
+
+            
             setRefresh(!refresh)
-            console.log('gerando numero aleatorio para o hist')
+            // console.log('gerando numero aleatorio para o hist')
         }
     }, [girarCarousel]);
 
@@ -24,7 +24,8 @@ export default function CarouselHist(){
     // }, [numberHistory]);
 
     useEffect(() => {
-        // console.log('children: ', histDados); // Verifica o estado atualizado
+        console.log('children: ', histDados); // Verifica o estado atualizado
+        
     }, [histDados]); // Escuta mudanças no histDados
 
     return (

@@ -1,90 +1,125 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { Children, useContext, useEffect, useRef, useState } from 'react';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import './slide.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { Navigation, Autoplay } from 'swiper/modules'; // Importando Autoplay
+import { Navigation, Autoplay } from 'swiper/modules';
 import { CurrentContext } from '../../../context/themeContext';
-import { json } from 'react-router-dom';
 
 export default function Slider({ settings, children }) {
-    const swiperRef = useRef(null); // Cria uma referência para o Swiper
-    const {trava, setTrava, girarCarousel, setGirarCarousel} = useContext(CurrentContext)
+    const swiperRef = useRef(null);
+    const {setRefresh, girarCarousel, trava, setTrava, setGirarCarousel, setHistDados, setValue } = useContext(CurrentContext);
+    const [visibleSlides, setVisibleSlides] = useState([]);
+    const [isExecuted, setIsExecuted] = useState(false); 
+
     useEffect(() => {
-        console.log('girar: ', girarCarousel);
-    
         if (swiperRef.current && swiperRef.current.swiper) {
             if (girarCarousel) {
-                swiperRef.current.swiper.autoplay.start(); // Inicia o autoplay
-                 // Pára o autoplay após 4 segundos (4000ms)
-                //  console.log('CARROUSEL girando')
-                let number = Math.floor(Math.random() * (8000 - 2000 + 1)) + 2000
-                // console.log('number: ', JSON.stringify(number))
+                swiperRef.current.swiper.autoplay.start();
+                const number = Math.floor(Math.random() * (8000 - 2000 + 1)) + 2000;
+    
                 const timeout = setTimeout(() => {
                     if (swiperRef.current && swiperRef.current.swiper) {
-                        swiperRef.current.swiper.autoplay.stop(); // Para o autoplay
+                        swiperRef.current.swiper.autoplay.stop();
+                        setTrava(true);
+    
+                        const innerTimeout = setTimeout(() => {
+                            setTrava(false);
+                            // Adicionado para redefinir girarCarousel após o tempo esgotar
+                        }, 6000);
+                        
                         setGirarCarousel(false)
-                        setTrava(true)
-                        // console.log('travou aqui')
-                        const timeout = setTimeout(() => {
-                            setTrava(false)
-                            // console.log('des - travou aqui')
-                        }, 6000); 
-                        return () => clearTimeout(timeout);
+                        setIsExecuted(false)
+                        return () => clearTimeout(innerTimeout);
                     }
-                    
-                }, number); // Gera um número aleatório entre 3000 e 8000ms
-
-                // Cleanup do timeout quando o componente desmontar
+                }, number);
+                
                 return () => clearTimeout(timeout);
-            } 
-            else { 
+                
+            } else {
                 swiperRef.current.swiper.autoplay.stop();
-                // console.log('CARROUSEL PARADO AQUI VEI')
-                // setTrava(false)
             }
-            //     // const timeout = setTimeout(() => {
-            //     //     setGirarCarousel(false)
-            //     // }, 2000); // Gera um número aleatório entre 3000 e 8000ms
+        }
+    }, [girarCarousel]);
+    
 
-            //     // // Cleanup do timeout quando o componente desmontar
-            //     // return () => clearTimeout(timeout);
-            // }
+    // Função para lidar com a mudança de slide e atualizar os slides visíveis
+    const handleSlideChange = () => {
+        const swiper = swiperRef.current.swiper;
+        const currentIndex = swiper.realIndex; // Índice do slide ativo
+        const slidesPerView = swiper.params.slidesPerView;
+
+        // Calcula os índices dos slides visíveis com base no slide ativo
+        const visible = Array.from({ length: slidesPerView }, (_, i) => (currentIndex + i) % children.length);
+        setVisibleSlides(visible);
+    };
+
+    // Estado para controlar a execução
+
+    useEffect(() => {
+        // Verifica se o carrossel está travado
+        if (!trava || isExecuted) {
+            return;
         }
 
-    }, [girarCarousel]);
+        // Verifica se já foi executado uma vez
+        if (visibleSlides && visibleSlides.length > 0) {
+            // Pega o índice do meio e o elemento correspondente
+            const middleIndex = Math.floor(visibleSlides.length / 2);
+            const middleChild = children[visibleSlides[middleIndex]];
+
+            // Atualiza histDados com o número do meio
+            setHistDados(prevDados => [middleChild, ...prevDados]);
+
+            // Marca como executado
+            setIsExecuted(true);
+        }
+    }, [visibleSlides, children, trava, isExecuted]);
 
     return (
-        <Swiper
-            {...settings} // Configurações do Swiper
-            ref={swiperRef} // Armazena a referência do Swiper
-            modules={[Navigation, Autoplay]} // Adicionando o Autoplay como módulo
-            spaceBetween={10}
-            slidesPerView={7}
-            // navigation={true}
-            loop={true} // Habilita o loop infinito
-            autoplay={{
-                delay: 100, // Pequeno delay para simular movimento rápido
-                disableOnInteraction: false, // Mantém o autoplay após interação
-            }}
-        >
-            {React.Children.map(children, (child, index) => (
-                <SwiperSlide key={index}>
-                    <div 
-                        className='square' 
-                        style={{
-                            background: 
-                                child === 15 ? 'white':
-                                child < 8 ? 'red' : 
-                                'rgb(15, 25, 35)'
-                        }}
-                    >
-                        {child}
-                    </div>      
-                </SwiperSlide>
-            ))}
-        </Swiper>
+        <div>
+            <Swiper
+                {...settings}
+                ref={swiperRef}
+                modules={[Navigation, Autoplay]}
+                spaceBetween={10}
+                slidesPerView={7}
+                loop={true}
+                autoplay={{
+                    delay: 100,
+                    disableOnInteraction: false,
+                }}
+                onSlideChange={handleSlideChange} // Atualiza os slides visíveis em cada mudança de slide
+            >
+                {React.Children.map(children, (child, index) => (
+                    <SwiperSlide key={index}>
+                        <div 
+                            className='square' 
+                            style={{
+                                background: 
+                                    child === 15 ? 'white' :
+                                    child < 8 ? 'red' : 
+                                    'rgb(15, 25, 35)'
+                            }}
+                        >
+                            {child}
+                        </div>      
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            {/* Exibe os índices dos slides visíveis no momento */}
+            {/* <div style={{ marginTop: '20px', color: 'white' }}>
+                Número do meio: {children[visibleSlides[Math.floor(visibleSlides.length / 2)]]}
+                
+                
+            </div> */}
+
+
+        </div>
     );
 }
+
+
+

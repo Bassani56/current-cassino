@@ -8,12 +8,22 @@
     
 }
 
+.nomes-usuario{
+    height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #323434;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .bot-hist{
     height: 51px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #202232;
+    background-color: #08080a;
     flex-direction: row;
     gap: 10px;
 }

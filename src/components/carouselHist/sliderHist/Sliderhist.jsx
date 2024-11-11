@@ -22,6 +22,14 @@ export default function Slider() {
 
     return (
             <div className='container-hist'>
+
+                        <button
+                            className='squareHist'
+                            
+                        >
+                            =
+                        </button>
+
                 {histDados.map((item, index) => (
                     <div key={index}>
                         <div

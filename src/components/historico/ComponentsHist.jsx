@@ -8,7 +8,7 @@ let contBlack = 0;
 let contWhite = 0;
 
 export default function ComponentsHist() {
-    const {trava, associacoes, setAssociacoes, histDados, girarCarousel, refresh, colorState, setColorState } = useContext(CurrentContext);
+    const {trava, associacoes, setAssociacoes, histDados, girarCarousel, refresh, colorState, setColorState, value } = useContext(CurrentContext);
     const [apostasRed, setApostasRed] = useState([]);
     const [apostasBlack, setApostasBlack] = useState([]);
     const [apostasWhite, setApostasWhite] = useState([]);
@@ -28,8 +28,15 @@ export default function ComponentsHist() {
     // },[histDados])
 
     useEffect(()=>{
-        // console.log('apostas red: ', apostasRed)
-    },[apostasRed])
+        if(!girarCarousel && !trava){
+            setApostasRed([])
+            setApostasBlack([])
+            setApostasWhite([])
+            contRed = 0;
+            contBlack = 0;
+            contWhite = 0;
+        }
+    },[girarCarousel, trava])
 
     useEffect(() => {
         if(girarCarousel || trava){
@@ -38,7 +45,7 @@ export default function ComponentsHist() {
         }
         else if(!girarCarousel && !trava){
         const intervalRed = setInterval(() => {
-            const numeroRed = Math.floor(Math.random() * 100000) + 10 - Math.floor(Math.random() * 100000) + 10;
+            const numeroRed = Math.floor(Math.random() * 100000) + 10;
             
             setApostasRed(prevDados => {
                 let novoArray;
@@ -167,7 +174,8 @@ export default function ComponentsHist() {
                     <div className="simbol-red"></div>
                     <div className="type">Vitória 2X</div>
                 </div>
-                <ContentBots apostas={apostasRed} nome={'red'}/>
+               
+                <ContentBots apostas={apostasRed} nome={'red'} corApostada={colorState} valorApostado={value} />
                 <div className="nome-user"><h2>+{contRed} jogadores</h2></div>
             </div>
             
@@ -176,7 +184,8 @@ export default function ComponentsHist() {
                     <div className="simbol-white"></div>
                     <div className="type">Vitória 14X</div>
                 </div>
-                <ContentBots apostas={apostasWhite}  nome={'white'}/>
+                
+                <ContentBots apostas={apostasWhite}  nome={'white'} corApostada={colorState} valorApostado={value}/>
                 <div className="nome-user"><h2>+{contWhite} jogadores</h2></div>
             </div>
 
@@ -185,7 +194,8 @@ export default function ComponentsHist() {
                     <div className="simbol-black"></div>
                     <div className="type">Vitória 2X</div>
                 </div>
-                <ContentBots apostas={apostasBlack} nome={'black'} />
+                
+                <ContentBots apostas={apostasBlack} nome={'black'} corApostada={colorState} valorApostado={value}/>
                 <div className="nome-user"><h2>+{contBlack} jogadores</h2></div>
             </div>
         </div>
