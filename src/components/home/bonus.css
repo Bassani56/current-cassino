@@ -1,9 +1,6 @@
-.span-bonus{
+#bonus{
     background-color: rgb(4, 212, 124);
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: aqua;
-    font-size: large;
+    padding: 0.6%;
+    text-align: center;
+    font-weight: bolder;
 }

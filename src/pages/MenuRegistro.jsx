@@ -1,4 +1,4 @@
-// import Header from "../components/home/Header"
+
 import BoasVindas from "../components/BoasVindas"
 import './menu.css'
 import Register from "../components/home/modal/Register"
@@ -31,12 +31,14 @@ export default function MenuRegistro(){
         <CurrentContext.Provider value={{showSpan, setShowSpan, showModelRegister, setShowModelRegister }}>
             <ErrorBoundary>
                 <Bonus/>
-                    <Header>
-                        <button id="button-entrar">Entrar</button>
-                        <button id="button-cadastrar" onClick={() => {setShowModelRegister(true)}}>Cadastre-se</button>
-                    </Header> 
-                    
                 <div className="app-dash" >
+                    <Header>
+                        {/**Fazer botao de entrar */}
+                        <div className='logindiv'>
+                            <button className="signin-button" onClick={() => {setShowModelRegister(true)}}>Entrar</button>
+                            <button className="signup-button" onClick={() => {setShowModelRegister(true)}}>Cadastre-se</button>
+                        </div>
+                    </Header>
                     <Span />
                     <div className="sub-app-dash">
                         <h1>Bem vindos ao <strong>Bolazula</strong></h1>
@@ -53,7 +55,6 @@ export default function MenuRegistro(){
                             </div>
                             <div className="square-context">DIV2</div>
                         </div>
-                        <Register/> 
                     </div>
                 </div>
             </ErrorBoundary>
