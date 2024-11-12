@@ -3,15 +3,8 @@
     flex-direction: column;
     justify-content: center;
     gap: 50px;
-    background-color:rgb(24, 11, 11)
 }
 .overlay-double{
-    
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgb(24, 11, 11); /* Fundo semi-transparente */
     display: flex;
     justify-content: center; /* Centraliza o modal horizontalmente */
     align-items: center; /* Centraliza o modal verticalmente */

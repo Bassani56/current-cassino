@@ -12,22 +12,31 @@
     align-items: center;
     a{
         color: white;
-        font-size: 1.5em;
+        font-size: 1.2em;
         text-decoration: none;
     }
 }
 
+.logodiv{
+    margin-top: 8px;
+    img{
+        max-width: 70px;
+        max-height: 70px;
+    }
+}
+
 .titlediv a{ 
-    font-size: 4em;
+    font-size: 3.5em;
     font-weight: bolder;
     border-right-style: dashed;
-    padding-right: 50px;
+    padding: 0 50px 0 20px;
     text-decoration: none;
 }
 
 .navbar{
     list-style: none;
     display: inline-flex;
+    padding-left: 50px;
     li {
         padding-right: 50px;
     }
@@ -35,14 +44,14 @@
 
 .rightbuttons{
     display: flex;
-    gap: 15px;
+    gap: 20px;
     
     button{
         margin: 5% 0;
         padding: 1%;
-        width: 160px;
+        width: 130px;
         border-radius: 15px;
-        font-size: 1.5em;
+        font-size: 1.2em;
         font-weight: bold;
         cursor:pointer;
     }

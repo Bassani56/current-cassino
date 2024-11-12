@@ -65,7 +65,6 @@ export default function Dashboards(){
                 <Transacoes open={open} setOpen={setOpen}/>
 
                 <div className="overlay-double" >
-                    {/* <h1>Bem vindos ao <strong>Bolazula</strong></h1> */}
                     <div className='content-double'>
                         <div className='left'>
                             <Aposta/>

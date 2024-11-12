@@ -1,5 +1,6 @@
 
 import './navigationbar.css'
+import images from '../../styles/imageindex';
 import { useNavigate } from 'react-router-dom';
 
 export default function NavigationBar({children}){
@@ -14,14 +15,17 @@ export default function NavigationBar({children}){
         <header>
             <div className="navdiv">
                 <div className='homediv'>
+                    <div className='logodiv'>
+                        <a href="/" onClick={handleHomePageClick}><img src={images.navbarlogoimg} alt="nao carregou"/></a>
+                    </div>
                     <div className='titlediv'>
-                        <a href="/" onClick={handleHomePageClick}>Bolazula</a> {/**Fazer voltar pra home quando clicar */}
+                        <a href="/" onClick={handleHomePageClick}>Bolazula</a>
                     </div>
                     <ul className='navbar'>
                         {/**Fazer paginas (acho interessante ter isso) */}
-                        <li className='options'><a href="#">Página Inicial</a></li>
-                        <li className='options'><a href="#">Jogos</a></li>
-                        <li className='options'><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Página Inicial</a></li>
+                        <li><a href="#">Jogos</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
                     </ul>
                 </div>
                 <div className='rightbuttons'>{children}</div>
