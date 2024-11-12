@@ -25,7 +25,7 @@ export default function Depositar({ open, setOpen }) {
             const data = await fetchHistory();
             const lastTransaction = data[Object.keys(data).length - 1];
             console.log('<<<   data retorno updateValor  >>> : ', data);
-            document.getElementById('valor-atual').innerText = JSON.stringify(lastTransaction.valor_atual);
+            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(lastTransaction.valor_atual);
         } catch (error) {
             console.error(error);
         }

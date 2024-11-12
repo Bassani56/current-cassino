@@ -59,7 +59,7 @@ export default function Dashboards(){
         >
             <div className='dashboard' >
                 <NavigationBar>
-                    <button id ='valor-atual' className='transaction-button' onClick={() => {setOpen(true)}} >R$-dinheiro</button>
+                    <button id ='valor-atual' className='transaction-button' onClick={() => {setOpen(true)}} >0</button>
                     <button className='logout-button' onClick={()=> {navigate("/")}} >Logout</button>
                 </NavigationBar>
 

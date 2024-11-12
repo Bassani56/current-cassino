@@ -1,8 +1,8 @@
-@font-face {
+@font-face{
     font-family: Poppins-Light;
     src: url(fonts/Poppins-Light.ttf);
 }
 
-* {
+*{
     font-family: Poppins-Light;
 }

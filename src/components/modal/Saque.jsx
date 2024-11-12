@@ -35,7 +35,7 @@ export default function Saque({ open, setOpen }) {
         try {
             const data = await fetchHistory();
             const lastTransaction = data[Object.keys(data).length - 1];
-            document.getElementById('valor-atual').innerText = JSON.stringify(lastTransaction.valor_atual);
+            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(lastTransaction.valor_atual);
         } catch (error) {
             console.error(error);
         }

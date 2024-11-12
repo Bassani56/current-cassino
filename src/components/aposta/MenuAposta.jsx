@@ -54,7 +54,7 @@ export default function Aposta(){
             const data = await fetchHistory()
             let aux =  data[Object.keys(data).length-1]
             console.log('data retorno: ', aux.valor_atual)
-            document.getElementById('valor-atual').innerText = JSON.stringify(data[Object.keys(data).length-1].valor_atual)
+            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(data[Object.keys(data).length-1].valor_atual)
         }
         console.log("DEVE ATUALIZAR AQUI CACETE")
         startValue()
