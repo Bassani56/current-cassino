@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
-
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ErroPage from './pages/ErroPage.jsx';
-import MenuRegistro from './pages/MenuRegistro.jsx';
+import HomePage from './pages/HomePage.jsx';
 import Dashboards from './pages/Dashboard.jsx';
 // const router = createBrowserRouter([
 //   {
@@ -39,7 +38,7 @@ const router = createBrowserRouter([
       // },
       {
         path: "/",
-        element: <MenuRegistro/>
+        element: <HomePage/>
       },
       {
         path: "dashboard",

@@ -1,0 +1,37 @@
+.centerdiv{
+    h1{
+        text-align: center;
+        color: white;
+        font-size: 4em;
+        margin: 21px;
+    }
+
+    img{
+        border-radius: 20px;
+    }
+}
+
+.image-container{
+    display: flex;
+    justify-content: center;
+}
+
+.signin-button{
+    /*background-color: rgb(18, 151, 0);*/
+    background-color: transparent;
+    border: rgb(109, 148, 255) solid 5px !important;
+    color: rgb(109, 148, 255) !important;
+}
+
+.signup-button{
+    /*background-color: rgb(241, 44, 76);*/
+    background-color: rgb(109, 148, 255);
+}
+
+.boxdiv{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+}

@@ -1,4 +1,3 @@
-import './index.css'
 import { CurrentContext } from '../../../context/themeContext'
 import { useContext, useEffect, useState } from 'react'
 import LogoMensagem from '../../img/logoMensagem.jpg'

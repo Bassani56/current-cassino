@@ -22,7 +22,7 @@
 
 .modal-title {
     font-size: 24px; /* Tamanho da fonte do título */
-    color: #d9534f; /* Cor do título */
+    color: rgb(109, 148, 255); /* Cor do título */
     margin: 0; /* Remove margens */
     text-align: center; /* Centraliza o texto */
 }
@@ -51,13 +51,13 @@
     padding: 10px 20px; /* Espaçamento do botão */
     font-size: 16px; /* Tamanho da fonte do botão */
     color: #fff; /* Cor do texto */
-    background-color: #d9534f; /* Cor de fundo do botão */
+    background-color: rgb(109, 148, 255); /* Cor de fundo do botão */
     border: none; /* Remove borda */
     border-radius: 5px; /* Borda arredondada do botão */
     cursor: pointer; /* Muda o cursor para pointer */
-    transition: background-color 0.3s; /* Transição suave na mudança de cor */
+    transition: background-color 0.3s ease; /* Transição suave na mudança de cor */
 }
 
 .confirm-button:hover {
-    background-color: #c9302c; /* Cor do botão ao passar o mouse */
+    background-color: rgb(0, 68, 255); /* Cor do botão ao passar o mouse */
 }

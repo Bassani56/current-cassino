@@ -1,7 +1,7 @@
 import './dash.css'
 import Carousel from '../components/carousel/Carousel'
 import { useEffect, useState } from 'react';
-import Header from '../components/home/Header';
+import NavigationBar from '../components/home/NavigationBar';
 import Aposta from '../components/aposta/MenuAposta';
 import useSound from 'use-sound';
 import audio from '../components/audio/audio-bolso.mp3'
@@ -58,11 +58,10 @@ export default function Dashboards(){
             colorState, setColorState}}
         >
             <div className='dashboard' >
-                <Header>
-                    <div id='valor-atual' className='value'>R$-dinheiro</div>
-                    <button className='depositar' onClick={() => {setOpen(true)}} >Transações</button>
-                    <button className='logout' onClick={()=>{navigate("/")}} >Logout</button>
-                </Header>
+                <NavigationBar>
+                    <button id ='valor-atual' className='transaction-button' onClick={() => {setOpen(true)}} >R$-dinheiro</button>
+                    <button className='logout-button' onClick={()=> {navigate("/")}} >Logout</button>
+                </NavigationBar>
 
                 <Transacoes open={open} setOpen={setOpen}/>
 

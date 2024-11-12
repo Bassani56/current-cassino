@@ -1,0 +1,25 @@
+.bonusbar{
+    background-color: rgb(4, 181, 212);
+    padding: 0.6%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.text{
+    font-weight: bolder;
+    margin-right: 38.5%;
+}
+
+.closebonus-button {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+.closebonus-button:hover{
+    color: white;
+}
