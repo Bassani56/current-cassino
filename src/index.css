@@ -1,4 +1,4 @@
-@import '../src/components/font.css';
+@import './styles/font.css';
 
 body{
   margin: 0;

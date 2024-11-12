@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import NavigationBar from '../components/home/NavigationBar';
 import Aposta from '../components/aposta/MenuAposta';
 import useSound from 'use-sound';
-import audio from '../components/audio/audio-bolso.mp3'
 import Register from '../components/home/modal/Register';
 import { CurrentContext } from '../context/themeContext';
 import { useNavigate } from 'react-router-dom';

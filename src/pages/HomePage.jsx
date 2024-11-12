@@ -1,5 +1,5 @@
 import './homepage.css'
-import images from '../components/imageindex'
+import images from '../styles/imageindex'
 import Register from "../components/home/modal/Register"
 import NavigationBar from "../components/home/NavigationBar"
 import ErrorBoundary from "../ErrorBoundary"
