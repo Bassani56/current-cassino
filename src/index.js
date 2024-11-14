@@ -5,18 +5,7 @@ import App from './App.jsx';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ErroPage from './pages/ErroPage.jsx';
 import HomePage from './pages/HomePage.jsx';
-import Dashboards from './pages/Dashboard.jsx';
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Autentication/>
-//   },
-//   {
-//     path: "/pag",
-//     element: <DashBoard />
-//   }
-
-// ])
+import RoulettePage from './pages/RoulettePage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,10 +13,14 @@ const router = createBrowserRouter([
     element: <App/>,
     errorElement: <ErroPage/>,
     children: [
-      // {
-      //   path: "/",
-      //   element: <Register/>,
-      // },
+      {
+        path: "HomePage",
+        element: <HomePage/>
+      },
+      {
+        path: "RoulettePage",
+        element: <RoulettePage/>,
+      }, 
       // {
       //   path: "/",
       //   element: <AuthPage/>
@@ -36,14 +29,6 @@ const router = createBrowserRouter([
       //   path: "/select",
       //   element: <SelectClient/>
       // },
-      {
-        path: "/",
-        element: <HomePage/>
-      },
-      {
-        path: "dashboard",
-        element: <Dashboards/>,
-      },
     ]
   }
 
@@ -56,7 +41,6 @@ root.render(
   <React.StrictMode>
     
     <RouterProvider router={router} />
-    
 
   </React.StrictMode>
 );

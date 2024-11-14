@@ -1,0 +1,27 @@
+.timerdiv{
+    display: flex;
+    background-color: rgb(15, 25, 35);
+    border: rgb(15, 25, 35) solid 3px;
+    border-radius: 10px;
+    box-shadow: 0 6px 6px rgb(50, 50, 50, 0.7);
+    color: white;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+.textdiv{
+    width: 30%;
+    text-align: center;
+}
+
+.countdowndiv{
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.timeleftdiv{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(109, 148, 255);
+    transition: width 1s linear;
+}

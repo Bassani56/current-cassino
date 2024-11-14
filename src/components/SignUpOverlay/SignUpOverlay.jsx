@@ -1,12 +1,12 @@
-import { CurrentContext } from '../../../context/themeContext'
+import { CurrentContext } from '../../context/themeContext'
 import { useContext, useEffect, useState } from 'react'
-import LogoMensagem from '../../../assets/img/logoMensagem.jpg'
-import Escolha from '../../../assets/img/antesEscolha.jpg'
-import Proteger from '../../../assets/img/deus-proteja-bolsonabo.jpg'
-import Urgente from '../../../assets/img/urgente-bolsonabo.jpg'
+import LogoMensagem from '../../assets/img/logoMensagem.jpg'
+import Escolha from '../../assets/img/antesEscolha.jpg'
+import Proteger from '../../assets/img/deus-proteja-bolsonabo.jpg'
+import Urgente from '../../assets/img/urgente-bolsonabo.jpg'
 import { useNavigate } from 'react-router-dom'
-import { supabase } from '../../../supabaseClient'
-import './register.css'
+import { supabase } from '../../supabaseClient'
+import './signupoverlay.css'
 
 export default function Register() {
     const { setShowModelRegister, showModelRegister } = useContext(CurrentContext)
@@ -37,7 +37,7 @@ export default function Register() {
                 alert(`Erro auth: ${error.message}`);
             } else {
                 alert('Registro realizado com sucesso! Verifique seu email para confirmar.');
-                navigate("/dashboard");
+                navigate("/RoulettePage");
             }
         } catch (err) {
             console.error('Erro no processo de registro:', err);

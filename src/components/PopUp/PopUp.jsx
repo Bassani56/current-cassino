@@ -1,6 +1,6 @@
-import './spans.css'
-import { CurrentContext } from '../../../../context/themeContext'
-import { useContext, useState } from 'react'
+import './popup.css'
+import { CurrentContext } from '../../context/themeContext'
+import { useContext } from 'react'
 
 export default function Span(){
     const {showSpan, setShowSpan} = useContext(CurrentContext)

@@ -1,19 +1,18 @@
-import './dash.css'
+import './roulettepage.css'
+import NavigationBar from '../components/NavigationBar';
+import CountDownTimer from '../components/CountDownTimer';
 import Carousel from '../components/carousel/Carousel'
 import { useEffect, useState } from 'react';
-import NavigationBar from '../components/home/NavigationBar';
 import Aposta from '../components/aposta/MenuAposta';
 import useSound from 'use-sound';
-import Register from '../components/home/modal/Register';
 import { CurrentContext } from '../context/themeContext';
 import { useNavigate } from 'react-router-dom';
 import CarouselHist from '../components/carouselHist/CarouselHist';
 import ComponentsHist from '../components/historico/ComponentsHist';
-import CursorTime from '../components/time/CursorTempo';
 import Depositar from '../components/modal/Depositar';
 import Transacoes from '../components/modal/Transações';
 
-export default function Dashboards(){
+export default function RoulettePage(){
 
     const [showModelRegister, setShowModelRegister] = useState(false);
     const [listaDouble, setListaDouble] = useState([])
@@ -56,37 +55,22 @@ export default function Dashboards(){
             setUpdateValueState, updateValueState, apostouState, setApostouState, 
             colorState, setColorState}}
         >
-            <div className='dashboard' >
-                <NavigationBar>
-                    <button id ='valor-atual' className='transaction-button' onClick={() => {setOpen(true)}} >0</button>
-                    <button className='logout-button' onClick={()=> {navigate("/")}} >Logout</button>
-                </NavigationBar>
+            <NavigationBar>
+                <button id ='valor-atual' className='transaction-button' onClick={() => {setOpen(true)}} >0</button>
+                <button className='logout-button' onClick={()=> {navigate("HomePage")}} >Logout</button>
+            </NavigationBar>
+            <Transacoes open={open} setOpen={setOpen}/>
 
-                <Transacoes open={open} setOpen={setOpen}/>
-
-                <div className="overlay-double" >
-                    <div className='content-double'>
-                        <div className='left'>
-                            <Aposta/>
-
-                        </div>
-                        <div className='right'>
-                            <div className='up'>
-                                <div className='container-tempo' >
-                                    <div className='espera' >
-                                        <CursorTime/>
-                                    </div>
-                                </div>
-                                <Carousel/>
-                                <div className='traco'></div>
-                            </div>
-                            <div className='down'>
-                                <h3>Giros anteriores</h3>
-                                <CarouselHist/>
-                                    
-                            </div>
-                        </div>
+            <div className='maindiv'>
+                <div className='centergamediv'>
+                    <CountDownTimer/>
+                    
+                    <div className='gamediv'>
+                        <Aposta/>
+                        <Carousel/>
                     </div>
+
+                    <CarouselHist/>
                 </div>
 
                 <div className="overlay-double">
@@ -94,9 +78,7 @@ export default function Dashboards(){
                         <ComponentsHist/>
                     </div>
                 </div>
-                
-        </div>
+            </div>
         </CurrentContext.Provider>
-       
     )
 }

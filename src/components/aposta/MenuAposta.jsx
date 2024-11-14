@@ -1,27 +1,28 @@
 import './menuaposta.css'
-import Register from '../home/modal/Register'
 import { useContext, useEffect, useState } from 'react'
 import { CurrentContext } from '../../context/themeContext'
 import { fetchHistory } from '../../hook/server'
-import CursorTime from '../time/CursorTempo'
+
 export default function Aposta(){
     const[call, setCall] = useState(true)
-     const{numberHistory, setNumberHistory, setShowModelRegister, value, setValue, setUpdateValueState, updateValueState, setColorState, colorState}  = useContext(CurrentContext)
-    const[valorAposta, setValorAposta] = useState(0)
+    const{numberHistory, setNumberHistory, value, setValue, setUpdateValueState, updateValueState}  = useContext(CurrentContext)
 
+    const {colorState, setColorState} = useContext(CurrentContext)
     const [activeButton, setActiveButton] = useState(null);
-
     const [inputValue, setInputValue] = useState(null);
 
     const handleInputChange = (event) => {
-        setInputValue(parseFloat(event.target.value));
+        if(event.target.value < 1000000){
+            setInputValue(parseFloat(event.target.value));
+        }else{
+            setInputValue(1000000);
+        }
     };
-
+    
     const handleButtonClick = (color, index) => {
         setColorState(color);
         setActiveButton(index);
     };
-
 
     // function addHistory(){
     //     let number = inputValue
@@ -59,60 +60,96 @@ export default function Aposta(){
         console.log("DEVE ATUALIZAR AQUI CACETE")
         startValue()
         setValue(0)
+        resetStartButtonText();
     },[updateValueState])
-
-
+    
+    /*
     function operacao(op) {
         if (op === 'div' && inputValue/2 >= 0.1) {
             setInputValue(prev => parseFloat((prev / 2).toFixed(2)));
         } else if(op === 'mul' && inputValue*2 < 1000000){
             setInputValue(prev => parseFloat((prev * 2).toFixed(2)));
         }
+    }*/
+    
+    /** Para conseguir usar o toLocaleString mesmo iniciando inputValue como null */
+    function toLocaleStringNullFix(x){
+        if(x != null){
+            return x.toLocaleString('pt-BR');
+        }else{
+            return null
+        }
+    }
+    /** Divisão e Multiplicação */
+    function div(){
+        if (inputValue / 2 >= 1) {
+            setInputValue(prev => prev / 2);
+        } 
+    }
+
+    function mult(){
+        if(inputValue * 2 < 1000000){ // 1 Milhão
+            setInputValue(prev => prev * 2);
+        }
+    }
+    /** Mudar botão de start pra ficar bonitin */
+    function changeStartButtonText() {
+        const buttonText = document.getElementById("betbutton");
+        buttonText.textContent = 'Valor jogado: ' + inputValue;
     }
     
+    function resetStartButtonText() {
+        const buttonText = document.getElementById("betbutton");
+        buttonText.textContent = 'Jogar';
+    }
 
+    /** Para fazer os botões funcionarem bem, ficarem maiores e tal */
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const colorbuttondiv = [
+        { index: 0, text: 'x2', color: 'rgb(241, 44, 76)', colorPattern: 'red' },
+        { index: 1, text: 'x14', color: 'white', colorPattern: 'white' },
+        { index: 2, text: 'x2', color: 'rgb(15, 25, 35)', colorPattern: 'black' }
+    ];
+    
     return(
         <div className="menu-aposta" >
-            <div className="valor-aposta">
-                <input 
-                    id="quantia-apostar" 
-                    placeholder='Quantia' 
-                    type="text" 
-                    value={inputValue}
-                    onChange={handleInputChange} />
-                <button id="divide" onClick={()=>{operacao('div')}}>1/2</button>
-                <button id="multiplica" onClick={()=>{operacao('mul')}}>2x</button>
+            <div className='inputdiv'>
+                <input
+                    type="number"
+                    placeholder='Quantia'
+                    value={toLocaleStringNullFix(inputValue)}
+                    onChange={handleInputChange}
+                />
             </div>
-            <h2>Selecionar Cor</h2>
-            <div className="selecionar-cor">
-            <button
-        onClick={() => handleButtonClick('red', 1)}
-        style={{ backgroundColor: 'red' }}
-        className={`quadros-option ${activeButton === 1 ? 'active' : ''}`}
-      >
-        x2
-      </button>
-      <button
-        onClick={() => handleButtonClick('white', 2)}
-        style={{ backgroundColor: 'white', color: 'red' }}
-        className={`quadros-option ${activeButton === 2 ? 'active' : ''}`}
-      >
-        x14
-      </button>
-      <button
-        onClick={() => handleButtonClick('black', 3)}
-        style={{ backgroundColor: 'black' }}
-        className={`quadros-option ${activeButton === 3 ? 'active' : ''}`}
-      >
-        x2
-      </button>
+            <div className='mathbuttondiv'>
+                <button onClick={()=>{div()}}>1/2</button>
+                <button onClick={()=>{mult()}}>2x</button>
+            </div>
+        
+            <div className='colorbuttondiv'>
+                {colorbuttondiv.map((colorbuttondiv, colorbuttonindex) => (
+                    <button
+                        key={colorbuttonindex}
+                        onMouseEnter={() => setHoveredIndex(colorbuttonindex)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                        onClick={() => handleButtonClick(colorbuttondiv.colorPattern, colorbuttondiv.index)}
+                        style={{
+                            backgroundColor: colorbuttondiv.color,
+                            color: colorbuttondiv.index === 2 ? 'white' : 'black',
+                            transform: (activeButton === colorbuttonindex || hoveredIndex === colorbuttonindex) ? 'scale(1.2)' : 'scale(1)',
+                            transition: 'transform 0.3s'
+                        }}
+                    >
+                        {colorbuttondiv.text}
+                    </button>
+                ))}
             </div>
 
-            <button onClick={()=> { handleStart()}} className='comecar-jogo' disabled={!inputValue} >
-                Começar jogo
-
-            </button  >
-            <Register/>
+            <div className='startdiv'>
+                <button id='betbutton' onClick={()=> { handleStart(); changeStartButtonText() }} disabled={!inputValue}>
+                    Jogar
+                </button>
+            </div>
         </div>
     )
 }

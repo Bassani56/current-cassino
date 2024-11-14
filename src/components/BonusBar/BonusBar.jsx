@@ -11,7 +11,7 @@ export default function BonusBar(){
     return(
         isVisible && (
             <div className='bonusbar'>
-                <span className='text'>Inscreva-se e receba bônus de até R$ 1000! 🇧🇷</span>
+                <div className='text'>Inscreva-se e receba bônus de até R$ 1000! 🇧🇷</div>
                 <button className="closebonus-button" onClick={handleClose}>&times;</button>
             </div>
         )
