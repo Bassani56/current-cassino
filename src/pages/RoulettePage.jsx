@@ -1,16 +1,17 @@
 import './roulettepage.css'
-import NavigationBar from '../components/NavigationBar';
-import CountDownTimer from '../components/CountDownTimer';
-import Carousel from '../components/carousel/Carousel'
 import { useEffect, useState } from 'react';
 import Aposta from '../components/aposta/MenuAposta';
 import useSound from 'use-sound';
 import { CurrentContext } from '../context/themeContext';
 import { useNavigate } from 'react-router-dom';
-import CarouselHist from '../components/carouselHist/CarouselHist';
 import ComponentsHist from '../components/historico/ComponentsHist';
 import Depositar from '../components/modal/Depositar';
 import Transacoes from '../components/modal/Transações';
+
+import NavigationBar from '../components/NavigationBar';
+import CountDownTimer from '../components/CountDownTimer';
+import Carousel from '../components/Carousel'
+import CarouselHistory from '../components/CarouselHistory';
 
 export default function RoulettePage(){
 
@@ -70,7 +71,7 @@ export default function RoulettePage(){
                         <Carousel/>
                     </div>
 
-                    <CarouselHist/>
+                    <CarouselHistory/>
                 </div>
 
                 <div className="overlay-double">

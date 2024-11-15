@@ -1,0 +1,26 @@
+
+.historydiv{
+    align-items: center;
+    height: 70px;
+    background-color: rgb(15, 25, 35);
+    border-radius: 10px;
+    box-shadow: 0 6px 6px rgb(50, 50, 50, 0.7);
+}
+
+.textdiv{
+    color: white;
+    font-size: 1.2em;
+    font-weight: bolder;
+    max-width: fit-content;
+    padding: 0 15px 0 0;
+    margin: 0 56px;
+}
+
+.numbersdiv{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(109, 148, 255);
+    gap: 15px;
+    border-radius: 8px;
+    padding: 4px;
+}

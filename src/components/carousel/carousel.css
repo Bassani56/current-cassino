@@ -1,23 +1,26 @@
-.carousel-container{
-    background-color: black;
-    padding: 0 10px;
-    margin: 25px 0;
+.carouseldiv{
+    position: relative;
+    border: 3px solid black;
     border-radius: 8px;
+    background-color: #303030;
+    box-shadow: 6px 6px 6px rgb(50, 50, 50, 0.7);
     display: flex;
     align-items: center;
-    width: 740px;
-    margin-left: 2px;
-    margin-right: 2px;
+    width: 750px;
+    margin: 10px 0;
+    padding: 0 5px;
+    pointer-events: none
 }
 
 
-.traco {
-    width: 5px;
-    height: 150px;
-    background-color: rgb(243, 250, 238);
-    position: absolute; /* Faz com que a div se sobreponha */
-    top: 29%; /* Ajuste conforme a necessidade */
-    left: 505; /* Ajuste conforme a necessidade */
-    z-index: 10; /* Controla a ordem de sobreposição */
+.middlebar{
+    position: absolute;
+    background-color: rgb(109, 148, 255);
+    width: 4px;
+    height: 130px;
+    border-radius: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
-

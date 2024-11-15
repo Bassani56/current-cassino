@@ -53,17 +53,15 @@ export default function HomePage(){
                             description='Aproveite seus últimos momentos com seu dinheiro, pois agora não os terá mais.'
                             button='Ir ao Cassino'
                             onButtonClick={() => {navigate("/RoulettePage")}}
-                        >    
-                        </Box>
+                        ></Box>
                         <Box
                             title='Sobre Nós'
                             description='Lorem icorporis repellat harum vero, adipisci quam ipsum! Rerum, nesciunt ducimus!'
                             button='Clica em mim >///<'
                             onButtonClick={() => {navigate("/RoulettePage")}} /*MUDAR*/
-                        >
-                        </Box>
+                        ></Box>
                     </div>
-                </div>
+                </div>          
             </ErrorBoundary>
         </CurrentContext.Provider>
     )

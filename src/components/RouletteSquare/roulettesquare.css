@@ -1,0 +1,9 @@
+.squarediv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.6em;
+    font-weight: bolder;
+}
