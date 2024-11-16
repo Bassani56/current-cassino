@@ -8,7 +8,7 @@ import RouletteSquare from '../RouletteSquare/RouletteSquare';
 import 'swiper/css';
 import './carousel.css'
 
-export default function Carousel(){
+export function Carousel(){
     const children = [1, 14, 2, 13, 3, 12, 4, 15, 11, 5, 10, 6, 9, 7, 8]
 
     const swiperRef = useRef(null);
@@ -29,8 +29,9 @@ export default function Carousel(){
     
                         const innerTimeout = setTimeout(() => {
                             setTrava(false);
+                            console.log('Time')
                             // Adicionado para redefinir girarCarousel após o tempo esgotar
-                        }, 6000);
+                        }, 1500);
                         
                         setGirarCarousel(false)
                         setIsExecuted(false)

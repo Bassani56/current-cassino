@@ -41,6 +41,7 @@ export default function ComponentsHist() {
     useEffect(() => {
         if(girarCarousel || trava){
             // contRed = 0;
+            console.log('Votlou', girarCarousel, trava)
             return
         }
         else if(!girarCarousel && !trava){

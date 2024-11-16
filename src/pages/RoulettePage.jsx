@@ -10,7 +10,7 @@ import Transacoes from '../components/modal/Transações';
 
 import NavigationBar from '../components/NavigationBar';
 import CountDownTimer from '../components/CountDownTimer';
-import Carousel from '../components/Carousel'
+import {Carousel} from '../components/carousel/Carousel'
 import CarouselHistory from '../components/CarouselHistory';
 
 export default function RoulettePage(){

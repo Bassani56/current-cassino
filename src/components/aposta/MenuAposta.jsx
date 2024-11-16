@@ -5,17 +5,52 @@ import { fetchHistory } from '../../hook/server'
 
 export default function Aposta(){
     const[call, setCall] = useState(true)
-    const{numberHistory, setNumberHistory, value, setValue, setUpdateValueState, updateValueState}  = useContext(CurrentContext)
+    const{numberHistory, girarCarousel, setNumberHistory, value, setValue, setUpdateValueState, updateValueState}  = useContext(CurrentContext)
 
     const {colorState, setColorState} = useContext(CurrentContext)
     const [activeButton, setActiveButton] = useState(null);
-    const [inputValue, setInputValue] = useState(null);
+    const [inputValue, setInputValue] = useState(''); // Começar como string
 
     const handleInputChange = (event) => {
-        if(event.target.value < 1000000){
-            setInputValue(parseFloat(event.target.value));
-        }else{
-            setInputValue(1000000);
+        let rawValue = event.target.value;
+    
+        // Substitui vírgula por ponto para facilitar a manipulação como número decimal
+        rawValue = rawValue.replace(',', '.');
+    
+        // Permitir apenas números e um único ponto decimal, e limitar a duas casas decimais
+        if (/^[0-9]*\.?[0-9]{0,2}$/.test(rawValue)) {
+            // Se o valor for numérico e dentro do limite
+            if (rawValue !== '' && !isNaN(parseFloat(rawValue)) && parseFloat(rawValue) <= 1000000) {
+                setInputValue(rawValue); // Atualiza com o valor válido
+            } else if (rawValue === '') {
+                setInputValue(''); // Reseta o campo se o valor não for numérico ou vazio
+            }
+        }
+    };
+    
+    const handleInputBlur = () => {
+        if (inputValue !== '') {
+            // Converte para número, limita a duas casas decimais e aplica formatação
+            let numericValue = parseFloat(inputValue);
+            
+            // Limita o valor máximo a 1.000.000
+            if (numericValue > 1000000) {
+                numericValue = 1000000;
+            }
+            
+            const formattedValue = numericValue.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            
+            setInputValue(formattedValue); // Deixa como string formatada
+        }
+    };
+    
+    const handleInputFocus = () => {
+        // Remove a formatação ao focar para permitir edição fácil
+        if (inputValue !== '') {
+            setInputValue(inputValue.replace(/\./g, '').replace(',', '.'));
         }
     };
     
@@ -24,31 +59,37 @@ export default function Aposta(){
         setActiveButton(index);
     };
 
-    // function addHistory(){
-    //     let number = inputValue
-    //     alert(number)
-    //     setNumberHistory(number)
-    // }
-
-    function handleStart(){
-        let currentValue = parseFloat(document.getElementById('valor-atual').innerHTML)
-        const valor_input = inputValue
-        console.log('current: ', currentValue, 'aposta: ', typeof(valor_input), valor_input)
-        if(colorState === null || inputValue > currentValue){
-            alert('escolha a cor primeiro')
-            return
+    function handleStart() {
+        
+        // Obtém o valor atual do 'valor-atual' (remover "R$")
+        let currentValue = document.getElementById('valor-atual').innerHTML;
+        console.log('Valor atual (raw):', currentValue);
+        
+        // Remove "R$" e qualquer outro caractere não numérico
+        currentValue = currentValue.replace(/[^\d.-]/g, '');
+        
+        // Converte para número
+        currentValue = parseFloat(currentValue);
+        const valor_input = parseFloat(inputValue); // O valor da aposta que o usuário inseriu
+        console.log('Valor atual (convertido):', currentValue);
+        console.log('Aposta: ', valor_input);
+    
+        // Validação para verificar se a cor foi selecionada e se o valor da aposta é válido
+        if (colorState === null || valor_input > currentValue) {
+            alert('Escolha a cor primeiro ou o valor da aposta é maior que o valor disponível.');
+            return;
         }
-
-        setValue(prev => parseFloat(prev) + parseFloat(valor_input));
-
-        document.getElementById('valor-atual').innerHTML -= valor_input
-        // alert('aposta', )
+    
+        // Atualiza o valor da aposta
+        setValue(prev => prev + valor_input);
+    
+        // Subtrai o valor da aposta do valor atual
+        let newValue = currentValue - valor_input;
+    
+        // Atualiza o valor do 'valor-atual' no HTML, com o novo valor formatado
+        document.getElementById('valor-atual').innerHTML = 'R$' + newValue.toFixed(2);
     }
-
-    // useEffect(()=>{
-    //     console.log('value: ', value)
-    //     console.log('COR ATUAAL É: ', colorState)
-    // },[value])
+    
 
     useEffect(()=>{  //atualiza o valor que o usuario tem em caixa - aparece o valor no menu
         async function startValue() {
@@ -63,15 +104,6 @@ export default function Aposta(){
         resetStartButtonText();
     },[updateValueState])
     
-    /*
-    function operacao(op) {
-        if (op === 'div' && inputValue/2 >= 0.1) {
-            setInputValue(prev => parseFloat((prev / 2).toFixed(2)));
-        } else if(op === 'mul' && inputValue*2 < 1000000){
-            setInputValue(prev => parseFloat((prev * 2).toFixed(2)));
-        }
-    }*/
-    
     /** Para conseguir usar o toLocaleString mesmo iniciando inputValue como null */
     function toLocaleStringNullFix(x){
         if(x != null){
@@ -81,17 +113,20 @@ export default function Aposta(){
         }
     }
     /** Divisão e Multiplicação */
-    function div(){
-        if (inputValue / 2 >= 1) {
-            setInputValue(prev => prev / 2);
+    function div() {
+        let valorInputNumerico = parseFloat(inputValue);
+        if (valorInputNumerico / 2 >= 0.10) {
+            setInputValue((valorInputNumerico / 2).toFixed(2)); // Manter duas casas decimais como string
         } 
     }
-
+    
     function mult(){
-        if(inputValue * 2 < 1000000){ // 1 Milhão
-            setInputValue(prev => prev * 2);
+        let valorInputNumerico = parseFloat(inputValue);
+        if(valorInputNumerico * 2 < 1000000){ // 1 Milhão
+            setInputValue((valorInputNumerico * 2).toFixed(2)); // Manter duas casas decimais como string
         }
     }
+    
     /** Mudar botão de start pra ficar bonitin */
     function changeStartButtonText() {
         const buttonText = document.getElementById("betbutton");
@@ -110,16 +145,18 @@ export default function Aposta(){
         { index: 1, text: 'x14', color: 'white', colorPattern: 'white' },
         { index: 2, text: 'x2', color: 'rgb(15, 25, 35)', colorPattern: 'black' }
     ];
-    
+
     return(
         <div className="menu-aposta" >
             <div className='inputdiv'>
-                <input
-                    type="number"
-                    placeholder='Quantia'
-                    value={toLocaleStringNullFix(inputValue)}
-                    onChange={handleInputChange}
-                />
+            <input
+                type="text"
+                placeholder="Quantia"
+                value={inputValue || ''}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                onFocus={handleInputFocus}
+            />
             </div>
             <div className='mathbuttondiv'>
                 <button onClick={()=>{div()}}>1/2</button>
@@ -146,7 +183,13 @@ export default function Aposta(){
             </div>
 
             <div className='startdiv'>
-                <button id='betbutton' onClick={()=> { handleStart(); changeStartButtonText() }} disabled={!inputValue}>
+                <button id='betbutton' onClick={()=> { 
+                    // if(girarCarousel){
+                    //     return
+                    // }  
+                     handleStart(); 
+                     changeStartButtonText() 
+                }} disabled={!inputValue || girarCarousel}>
                     Jogar
                 </button>
             </div>

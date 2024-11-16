@@ -160,7 +160,6 @@ useEffect(() => {
         <div className="container-apostas" >
             { corApostada === nome && valorApostado > 0 && (
                 <>
-                    
                     <div className="nomes-usuario"> USER {ganhou === 2 ? `$ ${valorApostado}` : ganhou === 1 ? `R$ ${valorApostado * 2}` : `$ ${valorApostado}`}</div>
                 </>
             )
