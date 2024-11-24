@@ -89,7 +89,6 @@ export default function Aposta(){
         // Atualiza o valor do 'valor-atual' no HTML, com o novo valor formatado
         document.getElementById('valor-atual').innerHTML = 'R$' + newValue.toFixed(2);
     }
-    
 
     useEffect(()=>{  //atualiza o valor que o usuario tem em caixa - aparece o valor no menu
         async function startValue() {
