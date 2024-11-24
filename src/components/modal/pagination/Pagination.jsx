@@ -25,7 +25,7 @@ const Pagination = ({ totalPages, currentPage, handlePageChange }) => {
 
   return (
     <div className="pagination">
-      {/* Botão para retroceder o conjunto de páginas, se necessário */}
+      Botão para retroceder o conjunto de páginas, se necessário
       {startIndex > 0 && (
         <button onClick={prevPageGroup} className="page-button">
           {'<'}

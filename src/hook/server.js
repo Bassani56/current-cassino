@@ -1,6 +1,6 @@
 import { supabase } from "../supabaseClient";
 
-export async function setTransacoes(novoValor, type) {
+export async function setTransacoes(novoValor, type, color) {
 //   await new Promise(resolve => setTimeout(resolve, 750));
     console.log('AQUI ESTA O TYPE ANTES: ', type)
     try {
@@ -10,6 +10,8 @@ export async function setTransacoes(novoValor, type) {
         if(last === undefined){
             last.valor_atual = 'teste';
         }
+
+        console.log('COR APOSTADA: ', color)
 
         let flag = false;
 
@@ -21,10 +23,16 @@ export async function setTransacoes(novoValor, type) {
         console.log('OS TYPE OFS: ', typeof(last.valor_atual), typeof(novoValor))
         console.log('atual: ', last.valor_atual, 'aposta: ', novoValor)
         const { data, error } = await supabase
-            .from('transacoes')
+            .from('newTransacoes')
             .insert([
                 {
-                    valor_atual: flag ? (last.valor_atual - novoValor) : (last.valor_atual + parseFloat(novoValor)),
+                    valor_atual: flag ? 
+                    (last.valor_atual - parseFloat(novoValor))  // Caso `flag` seja true, subtraia `novoValor`
+                    : (color === 'white' 
+                        ? (last.valor_atual + (14 * parseFloat(novoValor)))  // Se `color` for 'white', adicione 14 vezes `novoValor`
+                        : (last.valor_atual + parseFloat(novoValor))  // Caso contrário, apenas some `novoValor`
+                    ),
+
                     type: type,
                     valor: novoValor,
                     acertos: type === 'ganhou' ? last.acertos + 1 : last.acertos, // Incrementa acertos apenas se for 'ganhou'
@@ -48,7 +56,7 @@ export async function setTransacoes(novoValor, type) {
 
 export async function getLastTransaction() {
     const { data, error } = await supabase
-        .from('transacoes')
+        .from('newTransacoes')
         .select('*')
         .order('id', { ascending: false }) // ou use o nome da coluna que define a ordem
         .limit(1);
@@ -67,7 +75,7 @@ export async function fetchHistory() {
     try {
         // Insere um novo registro na tabela 'transacoes'
         const { data, error } = await supabase
-            .from('transacoes') 
+            .from('newTransacoes') 
             .select('*');
 
         if (error) {

@@ -48,7 +48,7 @@ export default function ContentBots({apostas, nome, valorApostado, corApostada})
         }
     },[trava, apostas])
 
-function victory(className){
+function victory(className, color){
     setGanhou(1)
     const elementos = document.getElementsByClassName(className);
 
@@ -61,7 +61,7 @@ function victory(className){
     }
 
     if(colorState === className){
-        setGanhosAposta('ganhou')
+        setGanhosAposta('ganhou', color)
     }
     
     // const timeoutId = setTimeout(() => {
@@ -87,9 +87,10 @@ function reset(){
     return () => clearTimeout(timeoutId);
 }
 
-async function setGanhosAposta(result) {
+async function setGanhosAposta(result, colorState) {
     if(value > 0){
-        await setTransacoes(value, result)
+        await setTransacoes(value, result, colorState)
+        console.log('<<<<<< C O L O R    S  T  A T E  >>>>>> ', colorState)
     }
     setUpdateValueState(!updateValueState)
 }
@@ -100,7 +101,7 @@ function setColor(className) {
     const elementos = document.getElementsByClassName(className);
 
     if(colorState === className){
-        setGanhosAposta('perdeu')
+        setGanhosAposta('perdeu', colorState)
     }
 
     // Itera por todos os elementos e muda a cor de fundo para vermelho
@@ -113,7 +114,7 @@ function setColor(className) {
 useEffect(() => {
     
     if (nome === 'red') {
-        if (histDados[0] > 7 && histDados[0] !== 20) {
+        if (histDados[0] > 7 && histDados[0] !== 15) {
             // console.log('vermelho perdeu');
             setColor('red');
             // esperaTime('red');
@@ -127,7 +128,7 @@ useEffect(() => {
         }
     } 
     else if (nome === 'white') {
-        if (histDados[0] > 7 && histDados[0] !== 20) {
+        if (histDados[0] > 7 && histDados[0] !== 15) {
             // console.log('white perdeu');
             setColor('white');
             // esperaTime('white');
@@ -137,11 +138,11 @@ useEffect(() => {
             // esperaTime('white');
         } else {
             // console.log('vitória do white');
-            victory(nome)
+            victory(nome, 'white')
         }
     }
     else if (nome === 'black') {
-        if (histDados[0] > 7 && histDados[0] !== 20) {
+        if (histDados[0] > 7 && histDados[0] !== 15) {
             // console.log('vitória do black');
             victory(nome)
         } else if (histDados[0] <= 7) {
@@ -164,20 +165,25 @@ useEffect(() => {
                 </>
             )
             }
-            { libera &&
-                apostasLocal.map((item, index) => (
-                    <div key={index}>
-                        <div className={`bot-hist ${nome}`}>
-                           <div className="nomes-user">
+            {libera && apostasLocal.map((item, index) => (
+                <div key={index}>
+                    <div className={`bot-hist ${nome}`}>
+                        <div className="nomes-user">
                             {obterNomeAssociado(item)}
-                            </div> 
-                            
-                            <h3>{ganhou === 2 ? `$ ${item}` : ganhou === 1 ? `R$ ${item * 2}` : `$ ${item}`}</h3>
-
                         </div>
+                        <h3>
+                            {ganhou === 2 
+                                ? `$ ${item}` 
+                                : ganhou === 1 && nome === 'white' 
+                                ? `R$ ${item * 14}` 
+                                : ganhou === 1 
+                                ? `R$ ${item * 2}` 
+                                : `$ ${item}`}
+                        </h3>
                     </div>
-                ))
-            }     
+                </div>
+            ))}
+
         </div>
     )
 }
