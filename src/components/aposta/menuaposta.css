@@ -1,7 +1,7 @@
 
 .menu-aposta{
     flex: 1;
-    display: grid;
+    display: flexbox;
     align-content: center;
 }
 
@@ -12,6 +12,7 @@
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    width: 100%;
     input{
         max-width: 70%;
         text-align: center;

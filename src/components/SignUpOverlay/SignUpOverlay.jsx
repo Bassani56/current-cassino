@@ -50,62 +50,49 @@ export default function Register() {
 
     if (showModelRegister) {
         return (
-            <div className="modal-container-register">
-                <div className="mensagem">
-                    <h2>AVISO!</h2>
-                    <p>Você tem certeza disso?</p>
-                    <img src={LogoMensagem} alt="" />
-                    <p>Você foi avisado</p>
-                </div>
-
-                <div className="modal-content-register cadastro">
-                    <button className='close-button-modal-register' onClick={() => { setShowModelRegister(false) }}>
+            <div className='overlaydiv'>
+                <div className="signupdiv">
+                    <button className='closebutton' onClick={() => { setShowModelRegister(false) }}>
                         &times;
                     </button>
 
-                    <h2><strong>Bolazula</strong></h2>
-                    <p>Cadastre-se na Bolazula</p>
+                    <div className='titlediv'>
+                        <h2>Bolazula</h2>
+                        <p>Cadastre-se agora</p>
+                    </div>
 
-                    <form 
-                        className="cadastro" 
-                        onSubmit={handleSignUp}
-                    >
-                        <input 
-                            type="text" 
-                            placeholder='Endereço de Email' 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            required 
-                        />
-
-                        <input 
-                            type="text" 
-                            placeholder='Senha' 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
-                        />
-
-                        <select 
-                            name="client" 
-                            onChange={handleSelectChange} 
-                            value={selectedPet} 
-                            className="select-client-dropdown"
-                        >
-                            <option value="">Selecione um pet</option>
-                            <option value="lule">Lule</option>
-                            <option value="bolsonabo">Bolsonabo</option>
-                            <option value="nenhum">Deus é mais...</option>
-                        </select>
-
-                        <div className='foto'>
-                            {selectedPet === 'bolsonabo' && <img src={Proteger} alt="" />}
-                            {selectedPet === 'lule' && <img src={Urgente} alt="" />}
-                            {selectedPet.length < 1 ? (
-                                <img src={Escolha} alt="" />
-                            ) : (
-                                <button className='' type='submit'>Comece já</button>
-                            )}
+                    <div className="formdiv" >
+                        <form onSubmit={handleSignUp}>
+                            <div className='inputdiv'>
+                                <input
+                                    type="text"
+                                    placeholder='Email'
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className='inputdiv'>
+                                <input
+                                    type="text"
+                                    placeholder='Senha'
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className='inputdiv'>
+                                <input
+                                    type="text"
+                                    maxLength={'14'}
+                                    placeholder='CPF'
+                                />
+                            </div>
+                        </form>
+                        <button className='signupbutton' type='submit'>Criar Conta</button>
+                        <div className='userexistsdiv'>
+                            Já tem uma conta?
+                            <button>Entrar</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         )

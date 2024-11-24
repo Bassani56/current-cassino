@@ -4,8 +4,8 @@
     box-shadow: 6px 6px rgb(50, 50, 50, 0.7);
     border-radius: 20px;
     padding: 0.8% 1%;
-    max-width: 400px;
-    display: flex;
+    width: 400px;
+    display: flexbox;
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
@@ -18,11 +18,11 @@
 }
 
 .button{
-    /*background-color: rgb(241, 44, 76);*/
     background-color: rgb(109, 148, 255);
     color: black;
     border: none;
     border-radius: 10px;
+    width: 160px;
     padding: 2%;
     font-size: 1.1em;
     cursor: pointer;

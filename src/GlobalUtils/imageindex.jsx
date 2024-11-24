@@ -1,11 +1,10 @@
-import homepageimg from '../assets/img/bolso-lula.jpg'
+import roulettehomepageimg from '../assets/img/roulettehomepage.jpg'
 import navbarlogoimg from '../assets/img/navbarlogo.png'
 
 // Exportar todas as imagens como um objeto
 const images = {
     navbarlogoimg,
-    homepageimg,
-
+    roulettehomepageimg,
 };
 
 export default images;

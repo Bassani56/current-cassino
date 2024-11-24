@@ -34,30 +34,30 @@ export default function HomePage(){
             <ErrorBoundary>
                 <PopUp/>
                 <BonusBar/>
+                <SignUpOverlay/>
                 <div>
                     <NavigationBar>
                         {/**Fazer botao de entrar */}
                         <button className="signin-button" onClick={() => {setShowModelRegister(true)}}>Entrar</button>
                         <button className="signup-button" onClick={() => {setShowModelRegister(true)}}>Criar Conta</button>
                     </NavigationBar>
-                    <SignUpOverlay/>
                     <div className="centerdiv">
                         <h1>Bem vindos ao Bolazula</h1>
                         <div className='image-container'>
-                            <img src={images.homepageimg} alt='nao carregou :('/>
+                            <img src={images.roulettehomepageimg} alt='nao carregou :('/>
                         </div>
                     </div>
                     <div className="boxdiv"  >
                         <Box
                             title='Cassino'
-                            description='Aproveite seus últimos momentos com seu dinheiro, pois agora não os terá mais.'
+                            description='Aproveite seus últimos momentos com seu dinheiro, pois agora não o terá mais.'
                             button='Ir ao Cassino'
                             onButtonClick={() => {navigate("/RoulettePage")}}
                         ></Box>
                         <Box
                             title='Sobre Nós'
-                            description='Lorem icorporis repellat harum vero, adipisci quam ipsum! Rerum, nesciunt ducimus!'
-                            button='Clica em mim >///<'
+                            description='texto temporario'
+                            button='botao temporario'
                             onButtonClick={() => {navigate("/RoulettePage")}} /*MUDAR*/
                         ></Box>
                     </div>

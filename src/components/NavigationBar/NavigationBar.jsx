@@ -18,7 +18,7 @@ export default function NavigationBar({children}){
                     <div className='logodiv'>
                         <a href="/HomePage" onClick={handleHomePageClick}><img src={images.navbarlogoimg} alt="nao carregou"/></a>
                     </div>
-                    <div className='titlediv'>
+                    <div className='titlenavdiv'>
                         <a href="/HomePage" onClick={handleHomePageClick}>Bolazula</a>
                     </div>
                     <ul className='navbar'>

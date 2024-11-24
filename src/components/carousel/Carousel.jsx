@@ -3,12 +3,12 @@ import { CurrentContext } from '../../context/themeContext';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 
-import RouletteSquare from '../RouletteSquare/RouletteSquare';
+import RouletteSquare from '../RouletteSquare';
 
 import 'swiper/css';
 import './carousel.css'
 
-export function Carousel(){
+export default function Carousel(){
     const children = [1, 14, 2, 13, 3, 12, 4, 15, 11, 5, 10, 6, 9, 7, 8]
 
     const swiperRef = useRef(null);
