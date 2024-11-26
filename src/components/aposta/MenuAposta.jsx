@@ -93,9 +93,10 @@ export default function Aposta(){
     useEffect(()=>{  //atualiza o valor que o usuario tem em caixa - aparece o valor no menu
         async function startValue() {
             const data = await fetchHistory()
+            console.log('data hist: ', data)
             let aux =  data[Object.keys(data).length-1]
-            console.log('data retorno: ', aux.valor_atual)
-            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(data[Object.keys(data).length-1].valor_atual)
+            console.log('data retorno: ', aux.saldo)
+            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(data[Object.keys(data).length-1].saldo)
         }
         console.log("DEVE ATUALIZAR AQUI CACETE")
         startValue()

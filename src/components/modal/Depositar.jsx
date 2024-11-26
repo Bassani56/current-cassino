@@ -4,13 +4,14 @@ import { fetchHistory, setTransacoes } from '../../hook/server';
 import { CurrentContext } from '../../context/themeContext';
 
 export default function Depositar({ open, setOpen }) {
-    const { value, setValue, setUpdateValueState, updateValueState } = useContext(CurrentContext);
+    const { value, setValue, setUpdateValueState, updateValueState, setColorState } = useContext(CurrentContext);
     const inputRef = useRef(null);
 
     async function deposit(e) {
         e.preventDefault();
         try {
             const amount = parseFloat(inputRef.current.value);
+            setColorState(null)
             await setTransacoes(amount, 'deposito');
             setValue(amount);  // Atualiza `value` com o valor depositado
             updateValor();
@@ -25,7 +26,7 @@ export default function Depositar({ open, setOpen }) {
             const data = await fetchHistory();
             const lastTransaction = data[Object.keys(data).length - 1];
             console.log('<<<   data retorno updateValor  >>> : ', data);
-            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(lastTransaction.valor_atual);
+            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(lastTransaction.saldo);
         } catch (error) {
             console.error(error);
         }

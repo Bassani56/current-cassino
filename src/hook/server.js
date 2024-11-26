@@ -1,128 +1,189 @@
 import { supabase } from "../supabaseClient";
 
 export async function setTransacoes(novoValor, type, color) {
-//   await new Promise(resolve => setTimeout(resolve, 750));
-    console.log('AQUI ESTA O TYPE ANTES: ', type)
+    console.log("AQUI ESTA O TYPE ANTES: ", type);
+
     try {
-        let last = await getLastTransaction()
-        console.log('LAST: ', last)
+        const last = await getLastTransaction();
+        console.log("LAST: ", last);
 
-        if(last === undefined){
-            last.valor_atual = 'teste';
+        if (!last) {
+            console.warn("Nenhuma transação anterior encontrada. Valores iniciais definidos.");
+            last = {
+                saldo: 0,
+                acertos: 0,
+                perdas: 0,
+                quantidade: 0,
+                transacoes: 0,
+            };
         }
 
-        console.log('COR APOSTADA: ', color)
+        const flag = type === "perdeu" || type === "saque";
+        console.log('flag: ', flag, type)
+        const novoValorAtual = flag
+            ? type != 'deposito' && last.saldo - parseFloat(novoValor) // Caso `flag` seja true, subtraia `novoValor`
+            : color === "white"
+            ? last.saldo + 14 * parseFloat(novoValor) // Se `color` for 'white', adicione 14 vezes `novoValor`
+            : last.saldo + parseFloat(novoValor); // Caso contrário, apenas some `novoValor`
 
-        let flag = false;
+    
+        console.log("COR APOSTADA: ", color, novoValorAtual);
 
-        if(type === 'perdeu' || type === 'saque'){
-            flag = true
-        }
-
-        console.log('type: ', type)
-        console.log('OS TYPE OFS: ', typeof(last.valor_atual), typeof(novoValor))
-        console.log('atual: ', last.valor_atual, 'aposta: ', novoValor)
-        const { data, error } = await supabase
-            .from('newTransacoes')
+        const { data_t, error_t } = await supabase
+            .from("transacoes")
             .insert([
                 {
-                    valor_atual: flag ? 
-                    (last.valor_atual - parseFloat(novoValor))  // Caso `flag` seja true, subtraia `novoValor`
-                    : (color === 'white' 
-                        ? (last.valor_atual + (14 * parseFloat(novoValor)))  // Se `color` for 'white', adicione 14 vezes `novoValor`
-                        : (last.valor_atual + parseFloat(novoValor))  // Caso contrário, apenas some `novoValor`
-                    ),
-
                     type: type,
                     valor: novoValor,
-                    acertos: type === 'ganhou' ? last.acertos + 1 : last.acertos, // Incrementa acertos apenas se for 'ganhou'
-                    perdas: type === 'perdeu' ? last.perdas + 1 : last.perdas // Decrementa perdas apenas se for 'perdeu'
-                }
-            ]).select();
+                },
+            ])
+            .select();
 
-        if (error) {
-            console.error('Erro ao executar a inserção:', error);
-            return null;
-        } else {
-            console.log('Dados inseridos com sucesso:', data);
-            return data;
+        if (error_t) {
+            console.error("Erro ao inserir na tabela transacoes:", error_t);
         }
+
+        const { data_u, error_u } = await supabase
+            .from("usuarios")
+            .update({
+                saldo: novoValorAtual,
+            })
+            .eq("id", last.id); // Substitua "id" pelo identificador correto do usuário
+
+        if (error_u) {
+            console.error("Erro ao atualizar tabela usuarios:", error_u);
+        }
+
+        const lastApostas = await getLastApostas()
+        const novaQuantidade = lastApostas.quantidade + 1;
+
+        const { data_a, error_a } = await supabase
+            .from("apostas")
+            .insert([
+                {
+                    ganhos: type === "ganhou" ? lastApostas.ganhos + 1 : lastApostas.ganhos,
+                    perdas: type === "perdeu" ? lastApostas.perdas + 1 : lastApostas.perdas,
+                    valor: type != 'saque' && type != 'deposito' && novoValor,
+                    cor: color,
+                    quantidade: novaQuantidade,
+                    resultado: type 
+                },
+            ]);
+
+        if (error_a) {
+            console.error("Erro ao inserir na tabela apostas:", error_a);
+        }
+
+        const { data_dt, error_dt } = await supabase
+            .from("database")
+            .update({
+                num_transacoes: last.transacoes + 1,
+            })
+            .eq("id", 1); // Atualize com o ID correto, se necessário
+
+        if (error_dt) {
+            console.error("Erro ao atualizar tabela database:", error_dt);
+        }
+
+        console.log("Dados inseridos e atualizados com sucesso.");
+
+        return {
+            transacoes: data_t,
+            usuarios: data_u,
+            apostas: data_a,
+            database: data_dt,
+        };
     } catch (error) {
-        console.error('Erro ao tentar inserir o registro:', error);
+        console.error("Erro ao tentar inserir ou atualizar registros:", error);
         return null;
     }
 }
-
 
 export async function getLastTransaction() {
-    const { data, error } = await supabase
-        .from('newTransacoes')
-        .select('*')
-        .order('id', { ascending: false }) // ou use o nome da coluna que define a ordem
-        .limit(1);
+    try {
+        const { data, error } = await supabase
+            .from("usuarios")
+            .select("*")
+            .order("id", { ascending: false })
+            .limit(1);
 
-    if (error) {
-        console.error('Erro ao buscar a última transação:', error);
+        if (error) {
+            console.error("Erro ao buscar a última transação:", error);
+            return null;
+        }
+
+        return data[0] || null;
+    } catch (error) {
+        console.error("Erro inesperado ao buscar a última transação:", error);
         return null;
     }
-
-    return data[0]; // Retorna a última transação
 }
 
+export async function getLastApostas() {
+    try {
+        const { data, error } = await supabase
+            .from("apostas")
+            .select("*")
+            .order("id", { ascending: false })
+            .limit(1);
 
+        if (error) {
+            console.error("Erro ao buscar a última transação:", error);
+            return null;
+        }
+
+        return data[0] || null;
+    } catch (error) {
+        console.error("Erro inesperado ao buscar a última transação:", error);
+        return null;
+    }
+}
 
 export async function fetchHistory() {
     try {
-        // Insere um novo registro na tabela 'transacoes'
         const { data, error } = await supabase
-            .from('newTransacoes') 
-            .select('*');
+            .from("usuarios")
+            .select("*");
 
         if (error) {
-            console.error('Erro ao executar a inserção:', error);
+            console.error("Erro ao buscar o histórico de transações:", error);
             return null;
-        } else {
-            console.log('Dados buscados com sucesso:', data);
-            return data;
         }
+
+        console.log("Histórico de transações buscado com sucesso:", data);
+        return data;
     } catch (error) {
-        console.error('Erro ao tentar inserir o registro:', error);
+        console.error("Erro inesperado ao buscar o histórico de transações:", error);
         return null;
     }
 }
 
 export async function inserirTransacoes() {
     let valorAtual = 5000; // Valor inicial para 'valor_atual'
-  
+
     for (let i = 0; i < 50; i++) {
-      // Gerando um valor aleatório entre 100 e 1000
-      const valor = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
-  
-      // Definindo o tipo da transação (ganhou ou perdeu)
-      const type = Math.random() > 0.5 ? 'ganhou' : 'perdeu';
-  
-      // Atualizando o valor atual com base no tipo
-      if (type === 'ganhou') {
-        valorAtual += valor;
-      } else {
-        valorAtual -= valor;
-      }
-  
-      // Inserindo a transação no Supabase
-      const { error } = await supabase.from('transacoes').insert([
-        {
-          valor: valor,
-          type: type,
-          valor_atual: valorAtual,
-        },
-      ]);
-  
-      if (error) {
-        console.error("Erro ao inserir transação:", error.message);
-      } else {
-        console.log(`Transação ${i + 1} inserida com sucesso.`);
-      }
+        const valor = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+        const type = Math.random() > 0.5 ? "ganhou" : "perdeu";
+
+        if (type === "ganhou") {
+            valorAtual += valor;
+        } else {
+            valorAtual -= valor;
+        }
+
+        const { error } = await supabase.from("transacoes").insert([
+            {
+                valor: valor,
+                type: type,
+            },
+        ]);
+
+        if (error) {
+            console.error("Erro ao inserir transação:", error.message);
+        } else {
+            console.log(`Transação ${i + 1} inserida com sucesso.`);
+        }
     }
-  
+
     console.log("Inserção de 50 transações concluída.");
-  }
+}

@@ -3,7 +3,7 @@ import { fetchHistory, setTransacoes } from '../../hook/server';
 import { CurrentContext } from '../../context/themeContext';
 
 export default function Saque({ open, setOpen }) {
-    const { value, setValue } = useContext(CurrentContext);
+    const { value, setValue, setColorState } = useContext(CurrentContext);
     const inputRef = useRef(null);
 
     async function Sacar(e) {
@@ -21,7 +21,7 @@ export default function Saque({ open, setOpen }) {
                 alert("Saldo insuficiente para realizar o saque");
                 return;
             }
-
+            setColorState(null)
             await setTransacoes(amount, 'saque');
             setValue(amount);
             updateValor();
@@ -35,7 +35,7 @@ export default function Saque({ open, setOpen }) {
         try {
             const data = await fetchHistory();
             const lastTransaction = data[Object.keys(data).length - 1];
-            document.getElementById('valor-atual').innerText = JSON.stringify(lastTransaction.valor_atual);
+            document.getElementById('valor-atual').innerText = 'R$' + JSON.stringify(lastTransaction.saldo);
         } catch (error) {
             console.error(error);
         }
