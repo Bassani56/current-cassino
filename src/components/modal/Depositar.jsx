@@ -43,21 +43,21 @@ export default function Depositar({ open, setOpen }) {
     }
 
     return (
-        <div className="saquediv">
+        <div className="depositodiv">
             <button className='depositoclosebutton' onClick={() => { setOpen(false) }}>
                 &times;
             </button >
-            <div className='depositodiv'>
-                <span className='depositotitle' style={{ color: "white" }}>VALORES DEPÓSITO</span>
+            <div className='depositocontents'>
+                <span className='depositotitle'>VALORES DEPÓSITO</span>
             
-                <div className="valoresdiv">
-                    <button onClick={() => setValue(120)} className="valoresbutton">120 BRL</button>
-                    <button onClick={() => setValue(240)} className="valoresbutton">240 BRL</button>
-                    <button onClick={() => setValue(600)} className="valoresbutton">600 BRL</button>
+                <div className="depositovaloresdiv">
+                    <button onClick={() => setValue(120)} className="depositovaloresbutton">120 BRL</button>
+                    <button onClick={() => setValue(240)} className="depositovaloresbutton">240 BRL</button>
+                    <button onClick={() => setValue(600)} className="depositovaloresbutton">600 BRL</button>
                 </div>
 
                 <input 
-                    className='valorinput'
+                    className='depositovalorinput'
                     ref={inputRef} 
                     onInput={(e) => setValue(e.target.value)} 
                     type="text" 

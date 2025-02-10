@@ -41,45 +41,47 @@ export default function HistTransacoes({ open, setOpen }) {
     };
 
     return (
-        <div className="container-modal-historico">
-            <span style={{ color: "white" }}>HISTÓRICO DE TRANSAÇÕES</span>
+        <div className="historicodiv">
+            <button className='historicoclosebutton' onClick={() => { setOpen(false) }}>
+                &times;
+            </button >
+            <div className='historicocontents'>
+                <span className='historicotitle'>HISTÓRICO</span>
+                {/* Renderizar os itens da página atual */}
+                {currentData.map((item, index) => {
+                    // Verifica se o item deve ser renderizado
+                    if (item.type === 'deposito' || item.type === 'saque' || item.type === 'INICIO' || item.valor === null) {
+                        return null; // Não renderiza nada se as condições não forem atendidas
+                    }
 
-            {/* Renderizar os itens da página atual */}
-            {currentData.map((item, index) => {
-                // Verifica se o item deve ser renderizado
-                if (item.type === 'deposito' || item.type === 'saque' || item.type === 'INICIO' || item.valor === null) {
-                    return null; // Não renderiza nada se as condições não forem atendidas
-                }
-
-                return (
-                    <div className="item-hist" key={index}>
-                        <div className="tipe-ap"  >{item.type}</div>
-                        <div style={{ color: item.type === 'ganhou' ? 'green' : 'red' }} className="value-ap">
-                            {item.type === 'ganhou' ? '+' : '-'} {item.valor}
+                    return (
+                        <div className="item-hist" key={index}>
+                            <div className="tipe-ap"  >{item.type}</div>
+                            <div style={{ color: item.type === 'ganhou' ? 'green' : 'red' }} className="value-ap">
+                                {item.type === 'ganhou' ? '+' : '-'} {item.valor}
+                            </div>
                         </div>
-                    </div>
-                );
-            })}
+                    );
+                })}
 
-            {/* Botões de navegação de páginas */}
-            {/* <div className="pagination">
-                {Array.from({ length: totalPages }, (_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                        className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
-            </div> */}
-            <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-            />
-
-            <button onClick={() => setOpen(false)}>X</button>
+                {/* Botões de navegação de páginas */}
+                {/* <div className="pagination">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                            className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div> */}
+                <Pagination
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    handlePageChange={handlePageChange}
+                />
+            </div>
         </div>
     );
 }

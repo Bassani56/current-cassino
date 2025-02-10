@@ -1,4 +1,4 @@
-.saquediv{
+.depositodiv{
     position: absolute;
     background-color:rgb(100, 100, 100);
     border-radius: 10px;
@@ -21,23 +21,25 @@
     color: black;
 }
 
-.depositodiv{
+.depositocontents{
     display: grid;
     justify-items: center;
     padding-top: 35px;
 }
 
 .depositotitle{
+    color: white;
     font-size: 1.2em;
+    font-weight: bold;
 }
 
-.valoresdiv{
+.depositovaloresdiv{
     display: flex;
     padding: 12px;
     gap: 10px;
 }
 
-.valoresbutton{
+.depositovaloresbutton{
     padding: 6px;
     border: none;
     border-radius: 10px;
@@ -47,16 +49,16 @@
     transition: all 0.3s ease;
 }
 
-.valoresbutton:hover{
+.depositovaloresbutton:hover{
     background-color: rgb(241, 44, 76);
 }
 
-.valorinput{
+.depositovalorinput{
     text-align: center;
     border-radius: 10px;
     font-size: 1.5em;
     border: none;
-    max-width: 50%;
+    max-width: 65%;
 }
 
 .depositoconfirmbutton{

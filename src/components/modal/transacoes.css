@@ -5,6 +5,7 @@
     display: grid;
     border-radius: 10px;
     padding-top: 35px;
+    z-index: 3;
 }
 
 .transacoesclosebutton{

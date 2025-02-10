@@ -53,24 +53,28 @@ export default function Saque({ open, setOpen }) {
     }
 
     return (
-        <div className="container-modal-deposito">
-            <span style={{ color: "white" }}>VALORES DE SAQUE</span>
-           
-            <div className="valores-pix">
-                <button onClick={() => setValue(100)} className="pix-button">100 BRL</button>
-                <button onClick={() => setValue(200)} className="pix-button">200 BRL</button>
-                <button onClick={() => setValue(400)} className="pix-button">400 BRL</button>
-            </div>
-
-            <input 
-                ref={inputRef} 
-                type="text" 
-                placeholder="Mínimo 60 BRL" 
-                onInput={(e) => setValue(e.target.value)}
-            />
-            <button onClick={Sacar} className="deposit-start">SACAR</button>
+        <div className="saquediv">
+            <button className='saqueclosebutton' onClick={() => { setOpen(false) }}>
+                &times;
+            </button >
+            <div className='saquecontents'>
+                <span className='saquetitle'>VALORES DE SAQUE</span>
             
-            <button onClick={() => setOpen(false)}>X</button>
+                <div className="saquevaloresdiv">
+                    <button onClick={() => setValue(100)} className="saquevaloresbutton">100 BRL</button>
+                    <button onClick={() => setValue(200)} className="saquevaloresbutton">200 BRL</button>
+                    <button onClick={() => setValue(400)} className="saquevaloresbutton">400 BRL</button>
+                </div>
+
+                <input 
+                    className='saquevalorinput'
+                    ref={inputRef} 
+                    type="text" 
+                    placeholder="Mínimo 60 BRL" 
+                    onInput={(e) => setValue(e.target.value)}
+                />
+                <button onClick={Sacar} className="saqueconfirmbutton">SACAR</button>
+            </div>
         </div>
     );
 }

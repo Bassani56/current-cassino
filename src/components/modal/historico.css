@@ -1,22 +1,40 @@
-.container-modal-historico{
-    background-color:rgb(73, 44, 44);
-    min-height: 260px;
-    width: 420px;
-    z-index: 99999;
-    position: fixed;
-    margin-left: 47%;
-    margin-bottom: 800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    gap: 10px;
-    border-radius: 4px;
-    color: aqua;
-    font-size: 28px;
+.historicodiv{
+    position: absolute;
+    background-color: rgb(100, 100, 100);
+    right: 192px;
+    display: grid;
+    border-radius: 10px;
+    padding-top: 35px;
+    z-index: 3;
 }
 
+.historicoclosebutton{
+    position: absolute;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 2em;
+    color: white;
+    padding-left: 12px;
+    transition: color 0.3s ease;
+}
+
+.historicoclosebutton:hover{
+    color: black;
+}
+
+.historicocontents{
+    display: grid;
+    justify-items: center;
+    padding-top: 35px;
+}
+
+.historicotitle{
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+/*----------------------------------------*/
 .item-hist{
     /* background-color: brown; */
     display: flex;
@@ -42,8 +60,3 @@
     width: 28px;
     height: 24px;
 }
-
-/* .pagination{
-    
-    
-} */
