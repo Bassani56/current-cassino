@@ -28,18 +28,8 @@
 .titlenavdiv a{ 
     font-size: 3.5em;
     font-weight: bolder;
-    border-right-style: dashed;
     padding: 0 50px 0 20px;
     text-decoration: none;
-}
-
-.navbar{
-    list-style: none;
-    display: inline-flex;
-    padding-left: 50px;
-    li {
-        padding-right: 50px;
-    }
 }
 
 .rightbuttons{

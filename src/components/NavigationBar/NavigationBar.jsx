@@ -21,12 +21,6 @@ export default function NavigationBar({children}){
                     <div className='titlenavdiv'>
                         <a href="/HomePage" onClick={handleHomePageClick}>Bolazula</a>
                     </div>
-                    <ul className='navbar'>
-                        {/**Fazer paginas (acho interessante ter isso) */}
-                        <li><a href="#">Página Inicial</a></li>
-                        <li><a href="#">Jogos</a></li>
-                        <li><a href="#">Sobre Nós</a></li>
-                    </ul>
                 </div>
                 <div className='rightbuttons'>{children}</div>
             </div>

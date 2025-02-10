@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function HomePage(){
     const [showModelRegister, setShowModelRegister] = useState(false);
+    const [activeOverlay, setActiveOverlay] = useState(null);
     const [showSpan, setShowSpan] = useState(false)
 
     const navigate = useNavigate()
@@ -34,12 +35,12 @@ export default function HomePage(){
             <ErrorBoundary>
                 <PopUp/>
                 <BonusBar/>
-                <SignUpOverlay/>
                 <div>
                     <NavigationBar>
-                        {/**Fazer botao de entrar */}
-                        <button className="signin-button" onClick={() => {setShowModelRegister(true)}}>Entrar</button>
-                        <button className="signup-button" onClick={() => {setShowModelRegister(true)}}>Criar Conta</button>
+                    <button className="signin-button" onClick={() => {setActiveOverlay("signin")}}>Entrar</button>
+                        <button className="signup-button" onClick={() => {setActiveOverlay("signup")}}>Criar Conta</button>
+                        {activeOverlay === "signin" && <SignInOverlay setActiveOverlay={setActiveOverlay}/>}
+                        {activeOverlay === "signup" && <SignUpOverlay setActiveOverlay={setActiveOverlay}/>}
                     </NavigationBar>
                     <div className="centerdiv">
                         <h1>Bem vindos ao Bolazula</h1>
@@ -53,12 +54,6 @@ export default function HomePage(){
                             description='Aproveite seus últimos momentos com seu dinheiro, pois agora não o terá mais.'
                             button='Ir ao Cassino'
                             onButtonClick={() => {navigate("/RoulettePage")}}
-                        ></Box>
-                        <Box
-                            title='Sobre Nós'
-                            description='texto temporario'
-                            button='botao temporario'
-                            onButtonClick={() => {navigate("/RoulettePage")}} /*MUDAR*/
                         ></Box>
                     </div>
                 </div>          
