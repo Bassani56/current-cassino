@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
 import { fetchHistory, setTransacoes } from '../../hook/server';
 import { CurrentContext } from '../../context/themeContext';
+import './saque.css'
 
 export default function Saque({ open, setOpen }) {
     const { value, setValue, setColorState } = useContext(CurrentContext);

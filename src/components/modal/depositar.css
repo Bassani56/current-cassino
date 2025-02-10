@@ -1,66 +1,77 @@
-.container-modal-deposito{
-    background-color:rgb(73, 44, 44);
-    min-height: 260px;
-    width: 290px;
-    z-index: 99999;
-    position: fixed;
-    margin-left: 47%;
-    margin-bottom: 800px;
+.saquediv{
+    position: absolute;
+    background-color:rgb(100, 100, 100);
+    border-radius: 10px;
+    right: 130px;
+    z-index: 3;
+}
+
+.depositoclosebutton{
+    position: absolute;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 2em;
+    color: white;
+    padding-left: 12px;
+    transition: color 0.3s ease;
+}
+
+.depositoclosebutton:hover{
+    color: black;
+}
+
+.depositodiv{
+    display: grid;
+    justify-items: center;
+    padding-top: 35px;
+}
+
+.depositotitle{
+    font-size: 1.2em;
+}
+
+.valoresdiv{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    padding: 12px;
     gap: 10px;
-    border-radius: 4px;
-    color: aqua;
 }
 
-.form-deposito{
-    background-color: blue;
-    height: 280px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    width: 200px;
-    border-radius: 4px;
+.valoresbutton{
+    padding: 6px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.valores-pix{
-    /* background-color: rgb(72, 127, 175); */
-    width: 270px;
-    display: flex;
-    flex-direction: row;
-    height: 40px;
-    justify-content: space-between;
-    box-sizing: border-box;
+.valoresbutton:hover{
+    background-color: rgb(241, 44, 76);
 }
 
-.pix-button{
-    width: 70px;
-    height: 40px;
+.valorinput{
+    text-align: center;
+    border-radius: 10px;
+    font-size: 1.5em;
+    border: none;
+    max-width: 50%;
 }
 
-
-
-.container-modal-deposito input{
-    background-color: aliceblue;
-    width: 270px;
-    display: flex;
-    flex-direction: row;
-    height: 40px;
-    justify-content: space-between;
-  
-    box-sizing: border-box;
+.depositoconfirmbutton{
+    margin: 12px;
+    padding: 6px;
+    background-color: rgb(109, 148, 255);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.deposit-start{
-    width: 270px;
-    height: 30px;
-    border: 1px solid wheat;
-}
-
-.item-hist{
-    background-color: rgb(30, 18, 41);
-    
+.depositoconfirmbutton:hover{
+    background-color: rgb(0, 68, 255);
+    color: white;
 }

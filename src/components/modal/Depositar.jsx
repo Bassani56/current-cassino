@@ -43,24 +43,28 @@ export default function Depositar({ open, setOpen }) {
     }
 
     return (
-        <div className="container-modal-deposito">
-            <span style={{ color: "white" }}>VALORES DEPÓSITO</span>
-           
-            <div className="valores-pix">
-                <button onClick={() => setValue(120)} className="pix-button">120 BRL</button>
-                <button onClick={() => setValue(240)} className="pix-button">240 BRL</button>
-                <button onClick={() => setValue(600)} className="pix-button">600 BRL</button>
-            </div>
-
-            <input 
-                ref={inputRef} 
-                onInput={(e) => setValue(e.target.value)} 
-                type="text" 
-                placeholder="Quantia(BRL)" 
-            />
-            <button onClick={deposit} className="deposit-start">DEPOSITAR</button>
+        <div className="saquediv">
+            <button className='depositoclosebutton' onClick={() => { setOpen(false) }}>
+                &times;
+            </button >
+            <div className='depositodiv'>
+                <span className='depositotitle' style={{ color: "white" }}>VALORES DEPÓSITO</span>
             
-            <button onClick={() => setOpen(false)}>X</button>
+                <div className="valoresdiv">
+                    <button onClick={() => setValue(120)} className="valoresbutton">120 BRL</button>
+                    <button onClick={() => setValue(240)} className="valoresbutton">240 BRL</button>
+                    <button onClick={() => setValue(600)} className="valoresbutton">600 BRL</button>
+                </div>
+
+                <input 
+                    className='valorinput'
+                    ref={inputRef} 
+                    onInput={(e) => setValue(e.target.value)} 
+                    type="text" 
+                    placeholder="Quantia(BRL)" 
+                />
+                <button onClick={deposit} className="depositoconfirmbutton">DEPOSITAR</button>
+            </div>
         </div>
     );
 }
