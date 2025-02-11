@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom"
 
 export default function HomePage(){
     const [showModelRegister, setShowModelRegister] = useState(false);
-    const [showModelLogin, setShowModelLogin] = useState(false);
     const [showSpan, setShowSpan] = useState(false)
 
     const navigate = useNavigate()
@@ -37,11 +36,10 @@ export default function HomePage(){
                 <PopUp/>
                 <BonusBar/>
                 <SignUpOverlay/>
-                <Loginup/>
                 <div>
                     <NavigationBar>
                         {/**Fazer botao de entrar */}
-                        <button className="signin-button" onClick={() => {setShowModelLogin(true)}}>Entrar</button>
+                        <button className="signin-button" onClick={() => {setShowModelRegister(true)}}>Entrar</button>
                         <button className="signup-button" onClick={() => {setShowModelRegister(true)}}>Criar Conta</button>
                     </NavigationBar>
                     <div className="centerdiv">
@@ -56,12 +54,6 @@ export default function HomePage(){
                             description='Aproveite seus últimos momentos com seu dinheiro, pois agora não o terá mais.'
                             button='Ir ao Cassino'
                             onButtonClick={() => {navigate("/RoulettePage")}}
-                        ></Box>
-                        <Box
-                            title='Sobre Nós'
-                            description='texto temporario'
-                            button='botao temporario'
-                            onButtonClick={() => {navigate("/RoulettePage")}} /*MUDAR*/
                         ></Box>
                     </div>
                 </div>          

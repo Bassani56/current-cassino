@@ -1,21 +1,16 @@
-import { CurrentContext } from '../../context/themeContext'
-import { useContext, useEffect, useState } from 'react'
-import LogoMensagem from '../../assets/img/logoMensagem.jpg'
-import Escolha from '../../assets/img/antesEscolha.jpg'
-import Proteger from '../../assets/img/deus-proteja-bolsonabo.jpg'
-import Urgente from '../../assets/img/urgente-bolsonabo.jpg'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../supabaseClient'
 import './signupoverlay.css'
 
 export default function Register() {
     const { setShowModelRegister, showModelRegister } = useContext(CurrentContext)
-    const {setShowModelLogin, showModelLogin} = useContext(CurrentContext)
-    // const [selectedPet, setSelectedPet] = useState('');
+    
+    const [selectedPet, setSelectedPet] = useState('');
 
-    // const handleSelectChange = (event) => {
-    //     setSelectedPet(event.target.value);
-    // };
+    const handleSelectChange = (event) => {
+        setSelectedPet(event.target.value);
+    };
     
     const navigate = useNavigate()
 
@@ -43,23 +38,16 @@ export default function Register() {
             console.error('Erro no processo de registro:', err);
         }
     };
-    
-    useEffect(() => {
-        console.log(showModelRegister)
-    }, [showModelRegister])
 
-    if (showModelRegister) {
-        return (
-            <div className='overlaydiv'>
-                <div className="signupdiv">
-                    <button className='closebutton' onClick={() => { setShowModelRegister(false) }}>
-                        &times;
-                    </button>
-
-                    <div className='titlediv'>
-                        <h2>Bolazula</h2>
-                        <p>Cadastre-se agora</p>
-                    </div>
+    return (
+        <div className='signup-overlaydiv' onClick={(e) => { 
+            if (e.target.classList.contains('signup-overlaydiv')) setActiveOverlay(null);
+        }}>
+            <div className="signupdiv">
+                <div className='signup-titlediv'>
+                    <h2>Bolazula</h2>
+                    <p>Cadastre-se agora</p>
+                </div>
 
                     <div className="formdiv" >
                         <form onSubmit={handleSignUp}>
@@ -86,22 +74,11 @@ export default function Register() {
                                     placeholder='CPF'
                                 />
                             </div>
-                            <div className='inputdiv'>
-                                <input
-                                    type="text"
-                                    maxLength={'14'}
-                                    placeholder='Nº da conta'
-                                />
-                            </div>
                         </form>
                         <button className='signupbutton' type='submit'>Criar Conta</button>
                         <div className='userexistsdiv'>
                             Já tem uma conta?
-                            <button
-                                 onClick={() => {setShowModelLogin(true); setShowModelRegister(false)}}
-                                
-                            >Entrar</button>
-
+                            <button>Entrar</button>
                         </div>
                     </div>
                 </div>
