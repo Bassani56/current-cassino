@@ -7,6 +7,7 @@ import BonusBar from "../components/BonusBar"
 import NavigationBar from "../components/NavigationBar"
 import SignInOverlay from '../components/SignInOverlay'
 import SignUpOverlay from "../components/SignUpOverlay"
+import Loginup from '../components/SignUpOverlay/Loginup'
 import Box from "../components/Box"
 
 import { useEffect, useState } from "react"
@@ -15,6 +16,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function HomePage(){
     const [showModelRegister, setShowModelRegister] = useState(false);
+    const [showModelLogin, setShowModelLogin] = useState(false);
     const [showSpan, setShowSpan] = useState(false)
 
     const navigate = useNavigate()
@@ -30,15 +32,16 @@ export default function HomePage(){
     }, []);
 
     return(
-        <CurrentContext.Provider value={{showSpan, setShowSpan, showModelRegister, setShowModelRegister}}>
+        <CurrentContext.Provider value={{showModelLogin, setShowModelLogin, showSpan, setShowSpan, showModelRegister, setShowModelRegister}}>
             <ErrorBoundary>
                 <PopUp/>
                 <BonusBar/>
                 <SignUpOverlay/>
+                <Loginup/>
                 <div>
                     <NavigationBar>
                         {/**Fazer botao de entrar */}
-                        <button className="signin-button" onClick={() => {setShowModelRegister(true)}}>Entrar</button>
+                        <button className="signin-button" onClick={() => {setShowModelLogin(true)}}>Entrar</button>
                         <button className="signup-button" onClick={() => {setShowModelRegister(true)}}>Criar Conta</button>
                     </NavigationBar>
                     <div className="centerdiv">

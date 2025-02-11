@@ -23,7 +23,7 @@ export default function NavigationBar({children}){
                     </div>
                     <ul className='navbar'>
                         {/**Fazer paginas (acho interessante ter isso) */}
-                        <li><a href="#">Página Inicial</a></li>
+                        <li><a href="#" onClick={()=> {navigate("/HomePage")}}>Página Inicial</a></li>
                         <li><a href="#">Jogos</a></li>
                         <li><a href="#">Sobre Nós</a></li>
                     </ul>

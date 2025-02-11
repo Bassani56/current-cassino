@@ -57,7 +57,7 @@ export default function RoulettePage(){
             colorState, setColorState}}
         >
             <NavigationBar>
-                <button id ='valor-atual' className='transaction-button' onClick={() => {setOpen(true)}} >0</button>
+                <button id ='valor-atual' className='transaction-button' onClick={() => {setOpen(true)}} ></button>
                 <button className='logout-button' onClick={()=> {navigate("/HomePage")}} >Logout</button>
             </NavigationBar>
             <Transacoes open={open} setOpen={setOpen}/>

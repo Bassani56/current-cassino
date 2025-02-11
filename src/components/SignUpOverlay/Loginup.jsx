@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../supabaseClient'
 import './signupoverlay.css'
 
-export default function Register() {
+export default function Loginup() {
     const { setShowModelRegister, showModelRegister } = useContext(CurrentContext)
     const {setShowModelLogin, showModelLogin} = useContext(CurrentContext)
     // const [selectedPet, setSelectedPet] = useState('');
@@ -45,20 +45,21 @@ export default function Register() {
     };
     
     useEffect(() => {
-        console.log(showModelRegister)
-    }, [showModelRegister])
+        console.log(showModelLogin)
+    }, [showModelLogin])
 
-    if (showModelRegister) {
+    if (showModelLogin) {
         return (
             <div className='overlaydiv'>
                 <div className="signupdiv">
-                    <button className='closebutton' onClick={() => { setShowModelRegister(false) }}>
+                    <button className='closebutton' onClick={() => { setShowModelLogin(false) }}>
+
                         &times;
                     </button>
 
                     <div className='titlediv'>
                         <h2>Bolazula</h2>
-                        <p>Cadastre-se agora</p>
+                        <p>Fazer login</p>
                     </div>
 
                     <div className="formdiv" >
@@ -79,28 +80,20 @@ export default function Register() {
                                     required
                                 />
                             </div>
-                            <div className='inputdiv'>
-                                <input
-                                    type="text"
-                                    maxLength={'14'}
-                                    placeholder='CPF'
-                                />
-                            </div>
-                            <div className='inputdiv'>
-                                <input
-                                    type="text"
-                                    maxLength={'14'}
-                                    placeholder='Nº da conta'
-                                />
-                            </div>
                         </form>
-                        <button className='signupbutton' type='submit'>Criar Conta</button>
+                        <button
+                            onClick={() => {navigate("/RoulettePage")}}
+                            className='signupbutton' type='submit'
+                            >
+                                Entrar
+                        </button>
+
                         <div className='userexistsdiv'>
-                            Já tem uma conta?
+                            Ainda não possui uma conta?
                             <button
-                                 onClick={() => {setShowModelLogin(true); setShowModelRegister(false)}}
-                                
-                            >Entrar</button>
+        
+                                onClick={() => {setShowModelLogin(false); setShowModelRegister(true)}}                               
+                            >Criar</button>
 
                         </div>
                     </div>

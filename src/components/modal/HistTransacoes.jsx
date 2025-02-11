@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { fetchHistory, inserirTransacoes } from '../../hook/server';
 import { CurrentContext } from '../../context/themeContext';
 import './historico.css';
+
 import Pagination from './pagination/Pagination';
 export default function HistTransacoes({ open, setOpen }) {
     const [data, setData] = useState([]);

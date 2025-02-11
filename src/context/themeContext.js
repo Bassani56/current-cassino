@@ -3,7 +3,9 @@ import { createContext } from "react";
 
 export const CurrentContext = createContext({
   setShowModelRegister: () => {},
-  showModelRegister: false, // Inicializa como false
+  showModelRegister: false, 
+  setShowModelLogin: () => {},
+  showModelLogin: false,// Inicializa como false
   setShowSpan: () => {},
   showSpan: null,
   setNumberHistory: () => {},
